@@ -36,8 +36,13 @@ public class BuyersMovement : MonoBehaviour
 
 
     [Header("Anomaly settings")]
+
+    [SerializeField] private float _stoppingRadius = 2f; // Buyer stops within this radius
+
+
     [Tooltip("After investigating the anomaly it gets scared. After this many seconds it runs away if its still scared")]
     [SerializeField] private float _runAwayCooldown;
+
     [SerializeField] Transform _getAwayPoint;
 
     #endregion
@@ -62,7 +67,7 @@ public class BuyersMovement : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(RandomAnomolyDestination());
+        StartCoroutine(RandomAnomalyDestination());
     }
 
     private void Update()
@@ -111,23 +116,29 @@ public class BuyersMovement : MonoBehaviour
 
         // Find another random point to set its destination to
         if (ReachedDestination()){
-            StartCoroutine(RandomAnomolyDestination());
+            StartCoroutine(RandomAnomalyDestination());
         }
     }
 
     private bool ReachedDestination(){
-        if (_agent.remainingDistance <= _agent.stoppingDistance){
+        if (_agent.remainingDistance <= _stoppingRadius){
             return true;
         }
 
         return false;
     }
 
-    private IEnumerator RandomAnomolyDestination(){
+    private IEnumerator RandomAnomalyDestination()
+    {
         yield return new WaitForSeconds(_resumeMovingDelay);
 
         Vector3 point = _navmeshUtilities.GetRandomPointOnNavmesh(_navmeshSurface);
-
+        
+        // Offset the destination by a random point within the stopping radius
+        Vector3 offset = Random.insideUnitSphere * _stoppingRadius;
+        offset.y = 0; // Keep buyer on the ground
+        point += offset;
+        
         _agent.SetDestination(point);
     }
 }
