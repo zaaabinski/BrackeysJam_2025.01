@@ -25,6 +25,12 @@ public class BuyersMovement : MonoBehaviour
 
     #endregion
 
+    #region 
+
+    public bool IsScared { get; private set; }
+
+    #endregion
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -42,9 +48,17 @@ public class BuyersMovement : MonoBehaviour
         Collider[] detectedAnomalies = surroundingColliders.Where(x => x.CompareTag("Anomaly")).ToArray();
 
         if (detectedAnomalies.Length > 0){
-            _agent.SetDestination(detectedAnomalies[0].transform.position);
-            return;
+            // Make sure we aren't setting the destination to the same thing
+            if (_agent.destination != detectedAnomalies[0].transform.position){
+                _agent.SetDestination(detectedAnomalies[0].transform.position);
+            }
+
+            IsScared = true;
+
+            return; // prevent it from going away from the anomaly before the player removes it
         }
+
+        IsScared = false;
 
         // If it reached its destination we reset it to another random point
         if (_agent.remainingDistance <= _agent.stoppingDistance){
