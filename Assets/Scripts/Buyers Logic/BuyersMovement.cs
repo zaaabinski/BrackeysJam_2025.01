@@ -24,8 +24,7 @@ public class BuyersMovement : MonoBehaviour
     [SerializeField] Transform _getAwayPoint;
 
     #endregion
-
-
+    
     #region private variables
 
     [SerializeField] private float _scaredTimer;
@@ -84,6 +83,7 @@ public class BuyersMovement : MonoBehaviour
             if (isEscaping)
             {
                 _renderer.material.color = Color.red;
+                GameManager.instance.RemoveBuyer(this.gameObject);
                 if (_agent.destination != _getAwayPoint.position)
                 {
                     _agent.destination = _getAwayPoint.position;
@@ -145,10 +145,11 @@ public class BuyersMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GetAway"))
+        if (other.CompareTag("GetAway")&&isEscaping)
         {
                 hasEscaped = true;
                 IsScared = false;
+                gameObject.SetActive(false);
         }
     }
 }

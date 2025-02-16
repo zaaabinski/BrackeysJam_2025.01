@@ -3,6 +3,7 @@ using UnityEngine;
 public class AnomalyScript : MonoBehaviour
 {
     [SerializeField] private GameObject infoText;
+    [SerializeField] private GameObject anomalyGoneParticles;
     private bool anomalyActive = true;
     private bool isPlayerInRange = false;
 
@@ -12,6 +13,8 @@ public class AnomalyScript : MonoBehaviour
         {
             isPlayerInRange = false;
             infoText.SetActive(false);
+            GameObject particles =  Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
+            Destroy(particles,1f);
             Debug.Log("Deactivating anomaly: " + gameObject.name);
             gameObject.SetActive(false);
         }
