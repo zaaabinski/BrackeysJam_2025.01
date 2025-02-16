@@ -6,6 +6,14 @@ using Unity.AI.Navigation;
 using System.Linq;
 using Random = UnityEngine.Random;
 
+public enum PossibleStates {
+    Normal,
+    Scared,
+    Investigating,
+    Escaping,
+    HasEscaped
+}
+
 public class BuyersMovement : MonoBehaviour
 {
     #region components
@@ -44,10 +52,17 @@ public class BuyersMovement : MonoBehaviour
 
     #region
 
-    public bool isEscaping=false;
-     [SerializeField] private bool hasEscaped = false;
-    [SerializeField] private bool IsScared = false;
-    [SerializeField] private GameObject scaredMark;
+    private PossibleStates _currentState;
+
+    public PossibleStates CurrentState {
+        get => _currentState;
+        set {
+            _currentState = value;
+            _scaredMark.SetActive(value != PossibleStates.Normal);
+        }
+    }
+
+    [SerializeField] private GameObject _scaredMark;
 
     #endregion
 
@@ -66,67 +81,80 @@ public class BuyersMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!hasEscaped)
-        {
-            if (IsScared && _scaredTimer < _runAwayCooldown)
-            {
-                timeAdder = Time.deltaTime;
-                _scaredTimer += timeAdder;
-                GameManager.instance.AddFear(timeAdder);
-            }
-            else if(!IsScared && _scaredTimer < _runAwayCooldown)
-            {
-                _scaredTimer = 0;
-            }
-            if(!isEscaping)
-                isEscaping = _scaredTimer >= _runAwayCooldown;
-            
-            if (isEscaping)
-            {
-                _renderer.material.color = Color.red;
-                if (_agent.destination != _getAwayPoint.position)
-                {
-                    _agent.destination = _getAwayPoint.position;
-                }
-                return;
-            }
-
-            // Check for any nearby anomalies
-            Collider[] surroundingColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadius,
-                _anomalyDetectionMask, QueryTriggerInteraction.Collide);
-            Collider[] detectedAnomalies = surroundingColliders.Where(x => x.CompareTag("Anomaly")).ToArray();
-
-            if (detectedAnomalies.Length > 0)
-            {
-                Vector3 anomalyPosition = detectedAnomalies[0].transform.position;
-
-                // Offset the destination by a random point within the stopping radius
-                Vector3 offset = Random.insideUnitSphere * stoppingRadius;
-                offset.y = 0; // Keep buyer on the ground
-                Vector3 targetPosition = anomalyPosition + offset;
-
-                // Make sure we aren't setting the destination to the same thing
-                if (_agent.destination != targetPosition)
-                {
-                    _agent.SetDestination(targetPosition);
-                }
-
-
-                IsScared = true;
-                scaredMark.SetActive(true);
-
-                return; // Prevent moving away before the anomaly is removed
-            }
-
-            IsScared = false;
-            scaredMark.SetActive(false);
-
-            // If it reached its destination within stopping radius, pick another destination
-            if (!_agent.pathPending && _agent.remainingDistance <= stoppingRadius)
-            {
-                StartCoroutine(RandomAnomalyDestination());
-            }
+        if (CurrentState == PossibleStates.HasEscaped) {
+            return;
         }
+
+        if (CurrentState == PossibleStates.Scared)
+        {
+            timeAdder = Time.deltaTime;
+            _scaredTimer += timeAdder;
+            GameManager.instance.AddFear(timeAdder);
+        }
+        else {
+            timeAdder = 0;
+        }
+
+        if (_scaredTimer >= _runAwayCooldown){
+            CurrentState = PossibleStates.Escaping;
+        }
+        
+        if (CurrentState == PossibleStates.Escaping)
+        {
+            _renderer.material.color = Color.red;
+
+            if (_agent.destination != _getAwayPoint.position)
+            {
+                _agent.SetDestination(_getAwayPoint.position);
+            }
+
+            return;
+        }
+
+        // Check for any nearby anomalies
+        Collider[] surroundingColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadius,
+            _anomalyDetectionMask, QueryTriggerInteraction.Collide);
+        Collider[] detectedAnomalies = surroundingColliders.Where(x => x.CompareTag("Anomaly")).ToArray();
+
+        if (detectedAnomalies.Length > 0)
+        {
+            Vector3 anomalyPosition = detectedAnomalies[0].transform.position;
+
+            // Offset the destination by a random point within the stopping radius
+            Vector3 offset = Random.insideUnitSphere * stoppingRadius;
+            offset.y = 0; // Keep buyer on the ground
+            Vector3 targetPosition = anomalyPosition + offset;
+
+            // Make sure we aren't setting the destination to the same thing
+            if (_agent.destination != targetPosition)
+            {
+                CurrentState = PossibleStates.Investigating;
+                _agent.SetDestination(targetPosition);
+            }
+
+            if (HasReachedDestination()){
+                CurrentState = PossibleStates.Scared;
+            }
+
+            return; // Prevent moving away before the anomaly is removed
+        }
+
+        CurrentState = PossibleStates.Normal;
+
+        // If it reached its destination within stopping radius, pick another destination
+        if (HasReachedDestination())
+        {
+            StartCoroutine(RandomAnomalyDestination());
+        }
+    }
+
+    private bool HasReachedDestination(){
+        if (!_agent.pathPending && _agent.remainingDistance <= stoppingRadius)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private IEnumerator RandomAnomalyDestination()
@@ -147,8 +175,7 @@ public class BuyersMovement : MonoBehaviour
     {
         if (other.CompareTag("GetAway"))
         {
-                hasEscaped = true;
-                IsScared = false;
+            CurrentState = PossibleStates.HasEscaped;
         }
     }
 }

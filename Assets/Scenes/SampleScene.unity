@@ -2516,10 +2516,7 @@ MonoBehaviour:
     m_Bits: 1
   _resumeMovingDelay: 0.2
   stoppingRadius: 2
-  isEscaping: 0
-  hasEscaped: 0
-  IsScared: 0
-  scaredMark: {fileID: 2016721939}
+  _scaredMark: {fileID: 2016721939}
 --- !u!136 &846644224
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4220,10 +4217,7 @@ MonoBehaviour:
     m_Bits: 1
   _resumeMovingDelay: 0.2
   stoppingRadius: 2
-  isEscaping: 0
-  hasEscaped: 0
-  IsScared: 0
-  scaredMark: {fileID: 409932233}
+  _scaredMark: {fileID: 409932233}
 --- !u!1 &2397963816075376725
 GameObject:
   m_ObjectHideFlags: 0
