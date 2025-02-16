@@ -9,7 +9,7 @@ public class AnomalyScript : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
-            anomalyActive = false;
+            gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
