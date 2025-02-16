@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 using Unity.AI.Navigation;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 public class BuyersMovement : MonoBehaviour
 {
@@ -26,7 +28,7 @@ public class BuyersMovement : MonoBehaviour
 
     #region private variables
 
-    private float _scaredTimer;
+    [SerializeField] private float _scaredTimer;
 
     #endregion
 
@@ -42,10 +44,14 @@ public class BuyersMovement : MonoBehaviour
 
     #region
 
+    public bool isEscaping=false;
+     [SerializeField] private bool hasEscaped = false;
     [SerializeField] private bool IsScared = false;
     [SerializeField] private GameObject scaredMark;
 
     #endregion
+
+    private float timeAdder = 0;
 
     private void Awake()
     {
@@ -60,60 +66,66 @@ public class BuyersMovement : MonoBehaviour
 
     private void Update()
     {
-        if (IsScared)
+        if (!hasEscaped)
         {
-            _scaredTimer += Time.deltaTime;
-        }
-        else
-        {
-            _scaredTimer = 0;
-        }
-
-        if (_scaredTimer > _runAwayCooldown)
-        {
-            _renderer.material.color = Color.red;
-            if (_agent.destination != _getAwayPoint.position)
+            if (IsScared && _scaredTimer < _runAwayCooldown)
             {
-                _agent.destination = _getAwayPoint.position;
+                timeAdder = Time.deltaTime;
+                _scaredTimer += timeAdder;
+                GameManager.instance.AddFear(timeAdder);
+            }
+            else if(!IsScared && _scaredTimer < _runAwayCooldown)
+            {
+                _scaredTimer = 0;
+            }
+            if(!isEscaping)
+                isEscaping = _scaredTimer >= _runAwayCooldown;
+            
+            if (isEscaping)
+            {
+                _renderer.material.color = Color.red;
+                if (_agent.destination != _getAwayPoint.position)
+                {
+                    _agent.destination = _getAwayPoint.position;
+                }
+                return;
             }
 
-            return;
-        }
+            // Check for any nearby anomalies
+            Collider[] surroundingColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadius,
+                _anomalyDetectionMask, QueryTriggerInteraction.Collide);
+            Collider[] detectedAnomalies = surroundingColliders.Where(x => x.CompareTag("Anomaly")).ToArray();
 
-        // Check for any nearby anomalies
-        Collider[] surroundingColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadius,
-            _anomalyDetectionMask, QueryTriggerInteraction.Collide);
-        Collider[] detectedAnomalies = surroundingColliders.Where(x => x.CompareTag("Anomaly")).ToArray();
-
-        if (detectedAnomalies.Length > 0)
-        {
-            Vector3 anomalyPosition = detectedAnomalies[0].transform.position;
-
-            // Offset the destination by a random point within the stopping radius
-            Vector3 offset = Random.insideUnitSphere * stoppingRadius;
-            offset.y = 0; // Keep buyer on the ground
-            Vector3 targetPosition = anomalyPosition + offset;
-
-            // Make sure we aren't setting the destination to the same thing
-            if (_agent.destination != targetPosition)
+            if (detectedAnomalies.Length > 0)
             {
-                _agent.SetDestination(targetPosition);
+                Vector3 anomalyPosition = detectedAnomalies[0].transform.position;
+
+                // Offset the destination by a random point within the stopping radius
+                Vector3 offset = Random.insideUnitSphere * stoppingRadius;
+                offset.y = 0; // Keep buyer on the ground
+                Vector3 targetPosition = anomalyPosition + offset;
+
+                // Make sure we aren't setting the destination to the same thing
+                if (_agent.destination != targetPosition)
+                {
+                    _agent.SetDestination(targetPosition);
+                }
+
+
+                IsScared = true;
+                scaredMark.SetActive(true);
+
+                return; // Prevent moving away before the anomaly is removed
             }
 
+            IsScared = false;
+            scaredMark.SetActive(false);
 
-            IsScared = true;
-            scaredMark.SetActive(true);
-
-            return; // Prevent moving away before the anomaly is removed
-        }
-
-        IsScared = false;
-        scaredMark.SetActive(false);
-
-        // If it reached its destination within stopping radius, pick another destination
-        if (!_agent.pathPending && _agent.remainingDistance <= stoppingRadius)
-        {
-            StartCoroutine(RandomAnomalyDestination());
+            // If it reached its destination within stopping radius, pick another destination
+            if (!_agent.pathPending && _agent.remainingDistance <= stoppingRadius)
+            {
+                StartCoroutine(RandomAnomalyDestination());
+            }
         }
     }
 
@@ -129,5 +141,14 @@ public class BuyersMovement : MonoBehaviour
         point += offset;
 
         _agent.SetDestination(point);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("GetAway"))
+        {
+                hasEscaped = true;
+                IsScared = false;
+        }
     }
 }
