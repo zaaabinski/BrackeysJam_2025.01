@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject buyer in buyersList)
         {
-            buyer.GetComponent<BuyersMovement>().isEscaping = true;
+            buyer.GetComponent<BuyersMovement>().CurrentState = PossibleStates.Escaping;
         }
     }
 }
