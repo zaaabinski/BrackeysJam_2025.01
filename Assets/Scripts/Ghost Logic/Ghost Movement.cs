@@ -20,6 +20,7 @@ public class GhostMovement : MonoBehaviour
 
     private void Awake()
     {
+        pointsList = GameObject.Find("PointsForGhost");
         _agent = GetComponent<NavMeshAgent>();
         foreach (Transform child in pointsList.transform)
         {

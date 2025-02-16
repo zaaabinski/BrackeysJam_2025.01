@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,10 +15,23 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(_GameSceneName);
     }
 
+    private void Awake()
+    {
+        if(SceneManager.GetActiveScene().name == "MainMenu")
+            PlayerPrefs.SetInt("howManyGhostToSpawn",1);
+    }
+
     public void ReturnToMenu(){
+        PlayerPrefs.SetInt("howManyGhostToSpawn",1);
         SceneManager.LoadScene(_mainMenuSceneName);
     }
 
+    public void RestartGameWhenOver()
+    {
+        PlayerPrefs.SetInt("howManyGhostToSpawn",1);
+        SceneManager.LoadScene(_GameSceneName);
+    }
+    
     public void QuitGame(){
         Application.Quit();
     }
