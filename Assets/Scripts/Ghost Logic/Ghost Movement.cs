@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
 
@@ -12,6 +13,13 @@ public class GhostMovement : MonoBehaviour
 
     #endregion
 
+    #region settings
+    [Header("Settings")]
+    
+    public float resumeMovingDelay;
+
+    #endregion
+
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -19,17 +27,19 @@ public class GhostMovement : MonoBehaviour
 
     private void Start()
     {
-        RandomAnomolyDestination();
+        StartCoroutine(RandomAnomolyDestination());
     }
 
     private void Update()
     {
         if (_agent.remainingDistance <= _agent.stoppingDistance){
-            RandomAnomolyDestination();
+            StartCoroutine(RandomAnomolyDestination());
         }
     }
 
-    private void RandomAnomolyDestination(){
+    private IEnumerator RandomAnomolyDestination(){
+        yield return new WaitForSeconds(resumeMovingDelay);
+
         Vector3 point = anomolyPoints[Random.Range(0, anomolyPoints.Count)].position;
 
         _agent.SetDestination(point);
