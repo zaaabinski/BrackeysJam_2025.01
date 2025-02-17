@@ -1766,6 +1766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944d56948a3598b4f855b8841e0776bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveReference: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   moveSpeed: 6
   cameraTransform: {fileID: 330585546}
 --- !u!54 &782557270

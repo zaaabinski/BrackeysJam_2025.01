@@ -1,7 +1,10 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private InputActionReference _moveReference;
+
     [SerializeField] private float moveSpeed = 5f; // Player movement speed
     [SerializeField] private Transform cameraTransform; // Assign the camera in the inspector
     
@@ -17,18 +20,18 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // Get input
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
+        Vector2 input = _moveReference.action.ReadValue<Vector2>();
 
         // Convert movement to be relative to camera rotation
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
+
         forward.y = 0;
         right.y = 0;
         forward.Normalize();
         right.Normalize();
         
-        movement = (forward * moveZ + right * moveX).normalized;
+        movement = (forward * input.y + right * input.x).normalized;
 
         // Rotate player to face movement direction
         if (movement.magnitude > 0.1f)
