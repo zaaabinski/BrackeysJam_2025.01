@@ -93,6 +93,9 @@ public class BuyersMovement : MonoBehaviour
     {
         _renderer = GetComponent<MeshRenderer>();
         _agent = GetComponent<NavMeshAgent>();
+        _navmeshUtilities = FindAnyObjectByType<NavmeshUtilities>();
+        _navmeshSurface = FindAnyObjectByType<NavMeshSurface>();
+        _getAwayPoint = FindAnyObjectByType<GetAwayIdentifier>().transform;
     }
 
     private void Start()

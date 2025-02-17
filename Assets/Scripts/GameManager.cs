@@ -16,14 +16,27 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private float generalFear = 0;
     [SerializeField] private Slider generalFearSlider;
-    public List<GameObject> buyersList = new List<GameObject>();
-    [SerializeField] private GameObject buyerHolder;
-    [SerializeField] private int howManyGhostToSpawn = 1;
-    [SerializeField] private GameObject ghostPrefab;
     
     [SerializeField] private GameObject winScreenPanel;
     [SerializeField] private GameObject loseScreenPanel;
     [SerializeField] private TextMeshProUGUI buyersInfoText;
+
+    #region buyers spawning
+
+    private int _amountOfBuyersToSpawn = 1;
+
+    [SerializeField] private int _buyersIncrementPerLevel;
+    [SerializeField] private GameObject _buyerPrefab;
+    [SerializeField] private GameObject buyerHolder;
+    
+    [SerializeField] private int howManyGhostToSpawn = 1;
+    [SerializeField] private GameObject ghostPrefab;
+    [SerializeField] private GameObject _ghostHolder;
+
+    private List<GameObject> _ghosts = new();
+    private List<GameObject> _buyers = new();
+
+    #endregion
 
     private bool isGameOver = false;
 
@@ -58,20 +71,32 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         generalFear = 0;
         timer = 60;
+
+        // Destroy deactivated ghosts from last time
+        foreach (GameObject ghost in _ghosts){
+            if (ghost == null) continue;
+
+            Destroy(ghost);
+        }
+        _ghosts.Clear();
         
+        // Add already existing buyers into their list
         foreach (Transform child in buyerHolder.transform)
         {
             if (child.GetComponent<BuyersMovement>()){
-                buyersList.Add(child.gameObject);
+                _buyers.Add(child.gameObject);
             }
             else{
                 Debug.LogWarning("Something else than a buyer detected in the buyer holder");
             }
         }
+        
 
         howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn", 1);
+        _amountOfBuyersToSpawn = PlayerPrefs.GetInt("amountOfBuyersToSpawn", 1);
 
         SpawnGhosts(howManyGhostToSpawn);
+        SpawnBuyers(_amountOfBuyersToSpawn);
         
         StartCoroutine(ReduceTime());
     }
@@ -79,29 +104,39 @@ public class GameManager : MonoBehaviour
     private void SpawnGhosts(int amount)
     {
         for (int i = 0; i < amount; i++){
-            Instantiate(ghostPrefab, transform.position, Quaternion.identity);
+            GameObject newGhost = Instantiate(ghostPrefab, transform.position, Quaternion.identity);
+            _ghosts.Add(newGhost);
+        }
+    }
+
+    private void SpawnBuyers(int amount){
+        for (int i = 0; i < amount; i++){
+            GameObject newBuyer = Instantiate(_buyerPrefab, transform.position, Quaternion.identity);
+            _buyers.Add(newBuyer);
         }
     }
 
     public void RemoveBuyer(GameObject buyer)
     {
-        buyersList.Remove(buyer);
+        _buyers.Remove(buyer);
 
-        if(buyersList.Count == 0 && !isGameOver){
+        if(_buyers.Count == 0 && !isGameOver){
             GameOver();
         }
     }
 
     private void LevelComplete()
     {
-        howManyGhostToSpawn += buyersList.Count;
+        howManyGhostToSpawn += _buyers.Count;
+        _amountOfBuyersToSpawn += _buyersIncrementPerLevel;
 
         PlayerPrefs.SetInt("howManyGhostToSpawn", howManyGhostToSpawn);
+        PlayerPrefs.SetInt("amountOfBuyersToSpawn", _amountOfBuyersToSpawn);
 
         winScreenPanel.SetActive(true);
 
-        if (buyersList.Count > 0) {
-            buyersInfoText.text =  buyersList.Count.ToString() + " stayed, there are all ghosts now...";
+        if (_buyers.Count > 0) {
+            buyersInfoText.text =  _buyers.Count.ToString() + " stayed, there are all ghosts now...";
         }
     }
 
@@ -126,7 +161,7 @@ public class GameManager : MonoBehaviour
 
     private void AllEscape()
     {
-        foreach (GameObject buyer in buyersList)
+        foreach (GameObject buyer in _buyers)
         {
             buyer.GetComponent<BuyersMovement>().CurrentState = PossibleStates.Escaping;
         }
