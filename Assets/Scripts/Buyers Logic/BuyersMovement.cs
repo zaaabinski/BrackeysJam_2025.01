@@ -36,7 +36,7 @@ public class BuyersMovement : MonoBehaviour
     
     #region private variables
 
-    [SerializeField] private float _scaredTimer;
+    private float _scaredTimer; // If you want to view this in the inspector just enable debug mode
 
     #endregion
 
@@ -51,6 +51,18 @@ public class BuyersMovement : MonoBehaviour
     #endregion
 
     #region Properties
+
+    private float ScaredTimer { 
+        get => _scaredTimer;
+
+        set {
+            // lerp the color of the scared mark based on the scared timer
+            float normalizedScaredTimer = _scaredTimer / _runAwayCooldown;
+            scaredMark.GetComponent<Renderer>().material.color = _buyersSettings.ScaredMarkGradient.Evaluate(normalizedScaredTimer);
+
+            _scaredTimer = value;
+        }
+    }
 
     private PossibleStates _currentState;
 
@@ -67,6 +79,8 @@ public class BuyersMovement : MonoBehaviour
             }
         }
     }
+
+    [SerializeField] private BuyersSettings _buyersSettings;
 
     [SerializeField] private GameObject scaredMark;
 
@@ -94,14 +108,14 @@ public class BuyersMovement : MonoBehaviour
 
         if (CurrentState == PossibleStates.Scared) {
             timeAdder = Time.deltaTime;
-            _scaredTimer += timeAdder;
+            ScaredTimer += timeAdder;
             GameManager.instance.AddFear(timeAdder);
         }
         else {
-            _scaredTimer = 0;
+            ScaredTimer = 0;
         }
 
-        if (_scaredTimer >= _runAwayCooldown) {
+        if (ScaredTimer >= _runAwayCooldown) {
             CurrentState = PossibleStates.Escaping;
         }
         

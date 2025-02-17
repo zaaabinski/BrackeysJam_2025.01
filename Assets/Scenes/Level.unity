@@ -2713,6 +2713,7 @@ MonoBehaviour:
     m_Bits: 1
   _resumeMovingDelay: 0.2
   stoppingRadius: 2
+  _buyersSettings: {fileID: 11400000, guid: c9782a955ae0f2741b396edc6f24d9c4, type: 2}
   scaredMark: {fileID: 2016721939}
 --- !u!136 &846644224
 CapsuleCollider:
@@ -5121,6 +5122,7 @@ MonoBehaviour:
     m_Bits: 1
   _resumeMovingDelay: 0.2
   stoppingRadius: 2
+  _buyersSettings: {fileID: 11400000, guid: c9782a955ae0f2741b396edc6f24d9c4, type: 2}
   scaredMark: {fileID: 409932233}
 --- !u!1 &2169298197120890260
 GameObject:
