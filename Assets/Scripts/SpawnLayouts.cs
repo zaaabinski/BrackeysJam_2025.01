@@ -1,8 +1,13 @@
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SpawnLayouts : MonoBehaviour
-{
+{ 
+    [SerializeField] private NavMeshSurface navSurfaceBuyer;
+    [SerializeField] private NavMeshSurface navSurfaceGhost;
+    
    [Header("LayoutPlaces")]
    [SerializeField] List<GameObject> layouts = new List<GameObject>();
 
@@ -18,5 +23,7 @@ public class SpawnLayouts : MonoBehaviour
       {
           Instantiate(roomTypeOne[Random.Range(0,roomTypeOne.Length)], roomType.transform.position, Quaternion.identity);
       }
+      navSurfaceBuyer.BuildNavMesh();
+      navSurfaceGhost.BuildNavMesh();
    }
 }
