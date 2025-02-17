@@ -5,19 +5,20 @@ using System.Collections;
 using TMPro;
 using UnityEngine.Serialization;
 using UnityEditor.Toolbars;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-
-
     #region timer
 
     [Header("Timer Logic")]
     [SerializeField] private float _startTime;
-    private float _timer;
+    [NonSerialized] public float _timer;
     [SerializeField] private TextMeshProUGUI timerText;
+
+    public event Action Last30SecondsStart;
 
     #endregion
 
@@ -77,6 +78,10 @@ public class GameManager : MonoBehaviour
         while (_timer > 0){
             _timer--;
             UpdateTimeText();
+
+            if (_timer <= 30){
+                Last30SecondsStart?.Invoke();
+            }
 
             yield return new WaitForSeconds(1);
         }
