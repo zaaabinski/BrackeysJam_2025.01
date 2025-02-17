@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using Unity.AI.Navigation;
 using System.Linq;
 using Random = UnityEngine.Random;
+using Unity.Collections;
 
 public enum PossibleStates {
     Normal,
@@ -121,7 +122,12 @@ public class BuyersMovement : MonoBehaviour
 
         if (detectedAnomalies.Length > 0)
         {
-            Vector3 anomalyPosition = detectedAnomalies[0].transform.position;
+            // Find the closest anomaly
+            Collider closestCollider = detectedAnomalies
+            .OrderBy(c => (c.transform.position - transform.position).sqrMagnitude)
+            .FirstOrDefault();
+
+            Vector3 anomalyPosition = closestCollider.transform.position;
 
             // Offset the destination by a random point within the stopping radius
             Vector3 offset = Random.insideUnitSphere * stoppingRadius;
@@ -131,11 +137,11 @@ public class BuyersMovement : MonoBehaviour
             _agent.SetDestination(targetPosition);
 
             // Make sure we aren't setting the destination to the same thing
-            if (_currentInvestigationTarget != detectedAnomalies[0].gameObject)
+            if (_currentInvestigationTarget != closestCollider.gameObject)
             {
                 CurrentState = PossibleStates.Investigating;
 
-                _currentInvestigationTarget = detectedAnomalies[0].gameObject;
+                _currentInvestigationTarget = closestCollider.gameObject;
             }
 
             if (HasReachedDestination()){
