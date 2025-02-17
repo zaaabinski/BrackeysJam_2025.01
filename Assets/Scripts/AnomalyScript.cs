@@ -2,14 +2,33 @@ using UnityEngine;
 
 public class AnomalyScript : MonoBehaviour
 {
+    #region Settings
+
+    [Header("Settings")]
+
+    [SerializeField] private KeyCode _interactionKey;
+
+    #endregion
+
+    #region Instances / Components
+
+    [Header("Instances / Components")]
+
     [SerializeField] private GameObject infoText;
     [SerializeField] private GameObject anomalyGoneParticles;
+
+    #endregion
+
+    #region private variables
+
     private bool anomalyActive = true;
     private bool isPlayerInRange = false;
 
+    #endregion
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
+        if (Input.GetKeyDown(_interactionKey) && isPlayerInRange)
         {
             isPlayerInRange = false;
             infoText.SetActive(false);
