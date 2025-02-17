@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.AI;
 
 public class GhostMovement : MonoBehaviour
 {
-    [SerializeField] private List<Transform> anomalyPoints = new List<Transform>();
-    [SerializeField] private GameObject pointsList;
+    [SerializeField] private List<GameObject> anomalyPoints = new List<GameObject>();
     
     #region components
     private NavMeshAgent _agent;
@@ -24,12 +24,8 @@ public class GhostMovement : MonoBehaviour
 
     private void Awake()
     {
-        pointsList = GameObject.Find("PointsForGhost");
+        anomalyPoints = GameObject.FindGameObjectsWithTag("AnomalyPoint").ToList();
         _agent = GetComponent<NavMeshAgent>();
-        foreach (Transform child in pointsList.transform)
-        {
-            anomalyPoints.Add(child);
-        }
     }
 
     private void ApplySpeedMultiplier(){
@@ -63,7 +59,7 @@ public class GhostMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(resumeMovingDelay);
 
-        Vector3 targetPoint = anomalyPoints[Random.Range(0, anomalyPoints.Count)].position;
+        Vector3 targetPoint = anomalyPoints[Random.Range(0, anomalyPoints.Count)].transform.position;
         
         // Offset the destination by a random point within the stopping radius
         Vector3 offset = Random.insideUnitSphere * stoppingRadius;
