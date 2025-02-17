@@ -29,27 +29,28 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (instance == null)
+        if (instance == null){
             instance = this;
+        }
+        else {
+            Destroy(gameObject); // Prevent duplicates in case we're gonna add more scenes
+        }
+
         Initialize();
     }
 
     private IEnumerator ReduceTime()
     {
-        if (timer >= 0)
-        {
+        while (timer > 0){
             timer--;
             timerText.text = timer.ToString();
+
             yield return new WaitForSeconds(1);
-            StartCoroutine(ReduceTime());
         }
-        else if (timer <= 1)
-        {
-            Time.timeScale = 0;
-            Debug.Log("Selling finished");
-            LevelComplete();
-            //function to call to calculate buyers left and ghosts ect
-        }
+
+        Time.timeScale = 0;
+        Debug.Log("Selling finished");
+        LevelComplete();
     }
 
     private void Initialize()
@@ -60,42 +61,48 @@ public class GameManager : MonoBehaviour
         
         foreach (Transform child in buyerHolder.transform)
         {
-            buyersList.Add(child.gameObject);
+            if (child.GetComponent<BuyersMovement>()){
+                buyersList.Add(child.gameObject);
+            }
+            else{
+                Debug.LogWarning("Something else than a buyer detected in the buyer holder");
+            }
         }
-        if(PlayerPrefs.HasKey("howManyGhostToSpawn"))
-            howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn");
-        else
-        {
-            PlayerPrefs.SetInt("howManyGhostToSpawn", 1);
-            howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn");
-        }
+
+        howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn", 1);
+
         SpawnGhosts(howManyGhostToSpawn);
-        
         
         StartCoroutine(ReduceTime());
     }
 
     private void SpawnGhosts(int amount)
     {
-        for(int i = 0; i < amount; i++)
+        for (int i = 0; i < amount; i++){
             Instantiate(ghostPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     public void RemoveBuyer(GameObject buyer)
     {
-            buyersList.Remove(buyer);
-            if(buyersList.Count == 0 && !isGameOver)
-                GameOver();
+        buyersList.Remove(buyer);
+
+        if(buyersList.Count == 0 && !isGameOver){
+            GameOver();
+        }
     }
 
     private void LevelComplete()
     {
         howManyGhostToSpawn += buyersList.Count;
+
         PlayerPrefs.SetInt("howManyGhostToSpawn", howManyGhostToSpawn);
+
         winScreenPanel.SetActive(true);
-        if(buyersList.Count >= 0)
-             buyersInfoText.text =  buyersList.Count.ToString() + " stayed, there are all ghosts now...";
-        
+
+        if (buyersList.Count > 0) {
+            buyersInfoText.text =  buyersList.Count.ToString() + " stayed, there are all ghosts now...";
+        }
     }
 
     private void GameOver()
@@ -121,7 +128,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (GameObject buyer in buyersList)
         {
-            buyer.GetComponent<BuyersMovement>().isEscaping = true;
+            buyer.GetComponent<BuyersMovement>().CurrentState = PossibleStates.Escaping;
         }
     }
 }
