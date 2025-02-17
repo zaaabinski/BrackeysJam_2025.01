@@ -414,5 +414,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c11b5484618b547b040f37b49dcc6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interactionKey: 102
   infoText: {fileID: 4887141697511795723}
   anomalyGoneParticles: {fileID: 8741868904249392435, guid: d89625c2e4070164a80fc55e3d0880d2, type: 3}

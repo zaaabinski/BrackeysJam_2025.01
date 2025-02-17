@@ -16,6 +16,10 @@ public class GhostMovement : MonoBehaviour
     [Header("Settings")]
     public float resumeMovingDelay;
     public float stoppingRadius = 2f; // Ghost stops within this radius instead of exact point
+
+    [Tooltip("The last 30 seconds the ghost speed gets multiplied by this value")]
+    [SerializeField] private float _speedMultiplier;
+
     #endregion
 
     private void Awake()
@@ -26,6 +30,20 @@ public class GhostMovement : MonoBehaviour
         {
             anomalyPoints.Add(child);
         }
+    }
+
+    private void ApplySpeedMultiplier(){
+        _agent.speed *= _speedMultiplier;
+    }
+
+    private void OnEnable()
+    {
+        GameManager.instance.Last30SecondsStart += ApplySpeedMultiplier;
+    }
+
+    private void OnDisable()
+    {
+        GameManager.instance.Last30SecondsStart -= ApplySpeedMultiplier;
     }
 
     private void Start()

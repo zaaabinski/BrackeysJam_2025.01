@@ -4,26 +4,45 @@ using UnityEngine.UI;
 using System.Collections;
 using TMPro;
 using UnityEngine.Serialization;
+using UnityEditor.Toolbars;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    #region timer
 
-    [SerializeField] private float timer;
+    [Header("Timer Logic")]
+    [SerializeField] private float _startTime;
+    [NonSerialized] public float _timer;
     [SerializeField] private TextMeshProUGUI timerText;
+
+    public event Action Last30SecondsStart;
+
+    #endregion
+
+    #region fear
     [SerializeField] private float fearGap;
 
     [SerializeField] private float generalFear = 0;
     [SerializeField] private Slider generalFearSlider;
+
+    #endregion
+
+    #region Ending Screens
+
+    [Header("Ending screens")]
     
     [SerializeField] private GameObject winScreenPanel;
     [SerializeField] private GameObject loseScreenPanel;
     [SerializeField] private TextMeshProUGUI buyersInfoText;
 
+    #endregion
+
     #region buyers spawning
 
-    private int _amountOfBuyersToSpawn = 1;
+    [Header("Buyer and ghost spawning settings")]
 
     [SerializeField] private int _buyersIncrementPerLevel;
     [SerializeField] private GameObject _buyerPrefab;
@@ -32,6 +51,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int howManyGhostToSpawn = 1;
     [SerializeField] private GameObject ghostPrefab;
     [SerializeField] private GameObject _ghostHolder;
+
+    private int _amountOfBuyersToSpawn = 1;
 
     private List<GameObject> _ghosts = new();
     private List<GameObject> _buyers = new();
@@ -54,9 +75,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator ReduceTime()
     {
-        while (timer > 0){
-            timer--;
-            timerText.text = timer.ToString();
+        while (_timer > 0){
+            _timer--;
+            UpdateTimeText();
+
+            if (_timer <= 30){
+                Last30SecondsStart?.Invoke();
+            }
 
             yield return new WaitForSeconds(1);
         }
@@ -66,11 +91,18 @@ public class GameManager : MonoBehaviour
         LevelComplete();
     }
 
+    private void UpdateTimeText(){
+        int minutes = (int)_timer / 60;
+        int seconds = (int)_timer % 60;
+
+        timerText.text = $"{minutes}m {seconds}s";
+    }
+
     private void Initialize()
     {
         Time.timeScale = 1;
         generalFear = 0;
-        timer = 60;
+        _timer = _startTime;
 
         // Destroy deactivated ghosts from last time
         foreach (GameObject ghost in _ghosts){
