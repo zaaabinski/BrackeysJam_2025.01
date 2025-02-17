@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        _moveReference.action.Enable();
     }
 
     void Update()
