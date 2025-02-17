@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class AnomalyScript : MonoBehaviour
 {
-    #region settings
-
-    [SerializeField] private KeyCode _interactionKey;
-
-    #endregion
-
     [SerializeField] private GameObject infoText;
     [SerializeField] private GameObject anomalyGoneParticles;
     private bool anomalyActive = true;
@@ -15,7 +9,7 @@ public class AnomalyScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(_interactionKey) && isPlayerInRange)
+        if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
         {
             isPlayerInRange = false;
             infoText.SetActive(false);
