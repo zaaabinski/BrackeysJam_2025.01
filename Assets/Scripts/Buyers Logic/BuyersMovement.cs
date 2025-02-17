@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using Unity.AI.Navigation;
 using System.Linq;
 using Random = UnityEngine.Random;
+using Unity.Collections;
 
 public enum PossibleStates {
     Normal,
@@ -35,7 +36,7 @@ public class BuyersMovement : MonoBehaviour
     
     #region private variables
 
-    [SerializeField] private float _scaredTimer;
+    private float _scaredTimer; // If you want to view this in the inspector just enable debug mode
 
     #endregion
 
@@ -50,6 +51,18 @@ public class BuyersMovement : MonoBehaviour
     #endregion
 
     #region Properties
+
+    private float ScaredTimer { 
+        get => _scaredTimer;
+
+        set {
+            // lerp the color of the scared mark based on the scared timer
+            float normalizedScaredTimer = _scaredTimer / _runAwayCooldown;
+            scaredMark.GetComponent<Renderer>().material.color = _buyersSettings.ScaredMarkGradient.Evaluate(normalizedScaredTimer);
+
+            _scaredTimer = value;
+        }
+    }
 
     private PossibleStates _currentState;
 
@@ -67,6 +80,8 @@ public class BuyersMovement : MonoBehaviour
         }
     }
 
+    [SerializeField] private BuyersSettings _buyersSettings;
+
     [SerializeField] private GameObject scaredMark;
 
     #endregion
@@ -78,6 +93,9 @@ public class BuyersMovement : MonoBehaviour
     {
         _renderer = GetComponent<MeshRenderer>();
         _agent = GetComponent<NavMeshAgent>();
+        _navmeshUtilities = FindAnyObjectByType<NavmeshUtilities>();
+        _navmeshSurface = FindAnyObjectByType<NavMeshSurface>();
+        _getAwayPoint = FindAnyObjectByType<GetAwayIdentifier>().transform;
     }
 
     private void Start()
@@ -93,14 +111,14 @@ public class BuyersMovement : MonoBehaviour
 
         if (CurrentState == PossibleStates.Scared) {
             timeAdder = Time.deltaTime;
-            _scaredTimer += timeAdder;
+            ScaredTimer += timeAdder;
             GameManager.instance.AddFear(timeAdder);
         }
         else {
-            _scaredTimer = 0;
+            ScaredTimer = 0;
         }
 
-        if (_scaredTimer >= _runAwayCooldown) {
+        if (ScaredTimer >= _runAwayCooldown) {
             CurrentState = PossibleStates.Escaping;
         }
         
@@ -121,7 +139,12 @@ public class BuyersMovement : MonoBehaviour
 
         if (detectedAnomalies.Length > 0)
         {
-            Vector3 anomalyPosition = detectedAnomalies[0].transform.position;
+            // Find the closest anomaly
+            Collider closestCollider = detectedAnomalies
+            .OrderBy(c => (c.transform.position - transform.position).sqrMagnitude)
+            .FirstOrDefault();
+
+            Vector3 anomalyPosition = closestCollider.transform.position;
 
             // Offset the destination by a random point within the stopping radius
             Vector3 offset = Random.insideUnitSphere * stoppingRadius;
@@ -131,11 +154,11 @@ public class BuyersMovement : MonoBehaviour
             _agent.SetDestination(targetPosition);
 
             // Make sure we aren't setting the destination to the same thing
-            if (_currentInvestigationTarget != detectedAnomalies[0].gameObject)
+            if (_currentInvestigationTarget != closestCollider.gameObject)
             {
                 CurrentState = PossibleStates.Investigating;
 
-                _currentInvestigationTarget = detectedAnomalies[0].gameObject;
+                _currentInvestigationTarget = closestCollider.gameObject;
             }
 
             if (HasReachedDestination()){
