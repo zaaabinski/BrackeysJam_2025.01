@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AnomalyScript : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class AnomalyScript : MonoBehaviour
 
     [Header("Settings")]
 
-    [SerializeField] private KeyCode _interactionKey;
+    [SerializeField] private InputActionReference _interactionReference;
 
     #endregion
 
@@ -26,9 +27,16 @@ public class AnomalyScript : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        _interactionReference.action.Enable();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(_interactionKey) && isPlayerInRange)
+        bool keyPressed = _interactionReference.action.ReadValue<float>() == 1;
+
+        if (keyPressed && isPlayerInRange)
         {
             isPlayerInRange = false;
             infoText.SetActive(false);

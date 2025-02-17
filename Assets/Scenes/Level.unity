@@ -1551,6 +1551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 944d56948a3598b4f855b8841e0776bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveReference: {fileID: 8564936672097364191, guid: 1169589c98906314ca7426f05321185e, type: 3}
   moveSpeed: 6
   cameraTransform: {fileID: 330585546}
 --- !u!54 &782557270
@@ -3228,7 +3229,7 @@ MonoBehaviour:
   buyersInfoText: {fileID: 298901999}
   _buyersIncrementPerLevel: 1
   _buyerPrefab: {fileID: 1059318945314867038, guid: 374d913c50d68054fb3bae7e9e2fb106, type: 3}
-  buyerHolder: {fileID: 535160246184548041}
+  buyerHolder: {fileID: 5117557793644104275}
   howManyGhostToSpawn: 1
   ghostPrefab: {fileID: 3802261600645818554, guid: 263b4cbafa444d643a00e3092f949922, type: 3}
   _ghostHolder: {fileID: 0}
