@@ -17,12 +17,15 @@ public enum PossibleStates {
 
 public class BuyersMovement : MonoBehaviour
 {
-    #region components
+    #region components / instances
 
     private NavMeshAgent _agent;
     private MeshRenderer _renderer;
     [SerializeField] private NavmeshUtilities _navmeshUtilities;
     [SerializeField] private NavMeshSurface _navmeshSurface;
+
+    private GameManager _gameManager;
+
 
     [Header("Anomaly settings")]
     [Tooltip(
@@ -75,7 +78,7 @@ public class BuyersMovement : MonoBehaviour
             scaredMark.SetActive(value != PossibleStates.Normal);
 
             if (value == PossibleStates.HasEscaped){
-                GameManager.instance.RemoveBuyer(this.gameObject);
+                _gameManager.RemoveBuyer(this.gameObject);
             }
         }
     }
@@ -96,6 +99,7 @@ public class BuyersMovement : MonoBehaviour
         _navmeshUtilities = FindAnyObjectByType<NavmeshUtilities>();
         _navmeshSurface = FindAnyObjectByType<NavMeshSurface>();
         _getAwayPoint = FindAnyObjectByType<GetAwayIdentifier>().transform;
+        _gameManager = FindAnyObjectByType<GameManager>();
     }
 
     private void Start()
@@ -112,7 +116,7 @@ public class BuyersMovement : MonoBehaviour
         if (CurrentState == PossibleStates.Scared) {
             timeAdder = Time.deltaTime;
             ScaredTimer += timeAdder;
-            GameManager.instance.AddFear(timeAdder);
+            _gameManager.AddFear(timeAdder);
         }
         else {
             ScaredTimer = 0;
