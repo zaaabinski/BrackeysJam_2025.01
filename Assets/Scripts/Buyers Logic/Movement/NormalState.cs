@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class NormalState : IBuyerState
 {
     private BuyersMovement _buyer;

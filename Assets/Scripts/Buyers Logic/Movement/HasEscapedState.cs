@@ -1,23 +1,21 @@
+using UnityEngine;
+
 public class HasEscapedState : IBuyerState
 {
     private BuyersMovement _buyer;
-    public BuyerStateType StateType => BuyerStateType.Normal;
+    public BuyerStateType StateType => BuyerStateType.HasEscaped;
 
     public HasEscapedState(BuyersMovement buyer)
     {
         _buyer = buyer;
     }
 
-    public void EnterState() { }
-
-    public void UpdateState()
-    {
-        if (_buyer.CheckForAnomalies()) {
-            _buyer.SetState(new InvestigationState(_buyer));
-        } else if (_buyer.HasReachedDestination()) {
-            _buyer.PickRandomDestination();
-        }
+    public void EnterState() { 
+        _buyer.gameObject.SetActive(false);
+        GameManager.instance.RemoveBuyer(_buyer.gameObject);
     }
+
+    public void UpdateState() { }
 
     public void ExitState() { }
 }

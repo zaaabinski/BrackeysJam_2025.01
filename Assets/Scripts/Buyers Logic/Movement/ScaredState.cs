@@ -1,7 +1,9 @@
+using UnityEngine;
+
 public class ScaredState : IBuyerState
 {
     private BuyersMovement _buyer;
-    public BuyerStateType StateType => BuyerStateType.Normal;
+    public BuyerStateType StateType => BuyerStateType.Scared;
 
     public ScaredState(BuyersMovement buyer)
     {
@@ -12,11 +14,11 @@ public class ScaredState : IBuyerState
 
     public void UpdateState()
     {
-        if (_buyer.CheckForAnomalies()) {
-            _buyer.SetState(new InvestigationState(_buyer));
-        } else if (_buyer.HasReachedDestination()) {
-            _buyer.PickRandomDestination();
+        if (_buyer.ShouldEscape()){
+            _buyer.SetState(new EscapingState(_buyer));
         }
+
+        _buyer.LerpScaredMarkColor();
     }
 
     public void ExitState() { }

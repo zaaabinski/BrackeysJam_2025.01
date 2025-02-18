@@ -1,21 +1,24 @@
+using UnityEngine;
+
 public class InvestigationState : IBuyerState
 {
     private BuyersMovement _buyer;
-    public BuyerStateType StateType => BuyerStateType.Normal;
+    public BuyerStateType StateType => BuyerStateType.Investigating;
 
     public InvestigationState(BuyersMovement buyer)
     {
         _buyer = buyer;
     }
 
-    public void EnterState() { }
+    public void EnterState() {
+        _buyer.MoveToAnomaly();
+        _buyer.ActivateScaredMark();
+     }
 
     public void UpdateState()
     {
-        if (_buyer.CheckForAnomalies()) {
-            _buyer.SetState(new InvestigationState(_buyer));
-        } else if (_buyer.HasReachedDestination()) {
-            _buyer.PickRandomDestination();
+        if (_buyer.HasReachedDestination()){
+            _buyer.SetState(new ScaredState(_buyer));
         }
     }
 
