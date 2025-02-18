@@ -144,9 +144,14 @@ public class BuyersMovement : MonoBehaviour
     private bool IsAnomalyVisible(Collider anomalyCollider)
     {
         Vector3 direction = anomalyCollider.transform.position - _visibilityStartObject.position;
-        return Physics.Raycast(transform.position, direction, _anomalyDetectionRadus, 1 << anomalyCollider.gameObject.layer);
-    }
 
+        if (Physics.Raycast(_visibilityStartObject.position, direction, out RaycastHit hit, _anomalyDetectionRadus))
+        {
+            return hit.collider == anomalyCollider;
+        }
+
+        return false;
+    }
 
     public void MoveToAnomaly() {
         GameObject anomaly = FindClosestAnomaly();
