@@ -125,9 +125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anomalyPoints: []
-  pointsList: {fileID: 0}
   resumeMovingDelay: 0.2
   stoppingRadius: 2
+  _speedMultiplier: 2
 --- !u!143 &5588888859733080811
 CharacterController:
   m_ObjectHideFlags: 0
