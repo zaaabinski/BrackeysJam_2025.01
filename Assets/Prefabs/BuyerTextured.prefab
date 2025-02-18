@@ -126,18 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1f79b97e5b01b40bd2c0625d8ddb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _navmeshUtilities: {fileID: 0}
-  _navmeshSurface: {fileID: 0}
-  _runAwayCooldown: 3
-  _getAwayPoint: {fileID: 0}
-  _anomalyDetectionRadius: 5
-  _anomalyDetectionMask:
-    serializedVersion: 2
-    m_Bits: 1
-  _resumeMovingDelay: 0.2
-  stoppingRadius: 2
-  _buyersSettings: {fileID: 11400000, guid: c9782a955ae0f2741b396edc6f24d9c4, type: 2}
-  scaredMark: {fileID: 5717714061347011364}
+  _scareTimeBeforeRunning: 3
 --- !u!195 &6906795097190788102
 NavMeshAgent:
   m_ObjectHideFlags: 0
