@@ -17,15 +17,13 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-        if(SceneManager.GetActiveScene().name == "MainMenu")
-            PlayerPrefs.SetInt("howManyGhostToSpawn",1);
+        if(SceneManager.GetActiveScene().name == _mainMenuSceneName){
+            PlayerPrefs.SetInt("howManyGhostToSpawn", 1);
             PlayerPrefs.SetInt("amountOfBuyersToSpawn", 1);
+        }
     }
 
     public void ReturnToMenu(){
-        PlayerPrefs.SetInt("howManyGhostToSpawn",1);
-        PlayerPrefs.SetInt("amountOfBuyersToSpawn",1);
-        
         SceneManager.LoadScene(_mainMenuSceneName);
     }
 

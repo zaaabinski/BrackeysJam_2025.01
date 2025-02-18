@@ -1261,7 +1261,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1014842286}
   m_FillRect: {fileID: 351656390}
   m_HandleRect: {fileID: 1014842285}
@@ -2193,7 +2193,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2040588303}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
@@ -3205,7 +3204,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1486926766}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2040588304
 MonoBehaviour:
@@ -3229,10 +3228,8 @@ MonoBehaviour:
   buyersInfoText: {fileID: 298901999}
   _buyersIncrementPerLevel: 1
   _buyerPrefab: {fileID: 2390456963823620801, guid: 721254d7d3c7f1f41bc61eab74924136, type: 3}
-  buyerHolder: {fileID: 5117557793644104275}
   howManyGhostToSpawn: 1
   ghostPrefab: {fileID: 6441617696671549818, guid: 27d0cfd7c4bf55d44802cf7b9651211d, type: 3}
-  _ghostHolder: {fileID: 0}
 --- !u!1 &2065465363
 GameObject:
   m_ObjectHideFlags: 0
@@ -3635,3 +3632,4 @@ SceneRoots:
   - {fileID: 2006010544}
   - {fileID: 8573272706213926357}
   - {fileID: 971451393}
+  - {fileID: 2040588303}

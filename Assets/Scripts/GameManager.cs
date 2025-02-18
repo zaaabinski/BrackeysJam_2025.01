@@ -9,8 +9,6 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
-
     #region timer
 
     [Header("Timer Logic")]
@@ -46,11 +44,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int _buyersIncrementPerLevel;
     [SerializeField] private GameObject _buyerPrefab;
-    [SerializeField] private GameObject buyerHolder;
     
     [SerializeField] private int howManyGhostToSpawn = 1;
     [SerializeField] private GameObject ghostPrefab;
-    [SerializeField] private GameObject _ghostHolder;
 
     private int _amountOfBuyersToSpawn = 1;
 
@@ -63,13 +59,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (instance == null){
-            instance = this;
-        }
-        else {
-            Destroy(gameObject); // Prevent duplicates in case we're gonna add more scenes
-        }
-
         Initialize();
     }
 
@@ -111,19 +100,15 @@ public class GameManager : MonoBehaviour
             Destroy(ghost);
         }
         _ghosts.Clear();
-        
-        // Add already existing buyers into their list
-        foreach (Transform child in buyerHolder.transform)
-        {
-            if (child.GetComponent<BuyersMovement>()){
-                _buyers.Add(child.gameObject);
-            }
-            else{
-                Debug.LogWarning("Something else than a buyer detected in the buyer holder");
-            }
-        }
-        
 
+        // Destroy deactivated buyers from last time
+        foreach (GameObject buyer in _buyers){
+            if (buyer == null) continue;
+
+            Destroy(buyer);
+        }
+        _buyers.Clear();
+        
         howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn", 1);
         _amountOfBuyersToSpawn = PlayerPrefs.GetInt("amountOfBuyersToSpawn", 1);
 

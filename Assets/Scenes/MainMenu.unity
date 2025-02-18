@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingsContainer: {fileID: 1844982412}
   _GameSceneName: Level
-  _mainMenuSceneName: 
+  _mainMenuSceneName: MainMenu
 --- !u!4 &881288
 Transform:
   m_ObjectHideFlags: 0
