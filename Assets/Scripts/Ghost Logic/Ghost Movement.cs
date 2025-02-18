@@ -10,7 +10,6 @@ public class GhostMovement : MonoBehaviour
     
     #region components / instances
     private NavMeshAgent _agent;
-    private GameManager _gameManager;
 
     #endregion
 
@@ -28,7 +27,6 @@ public class GhostMovement : MonoBehaviour
     {
         anomalyPoints = GameObject.FindGameObjectsWithTag("AnomalyPoint").ToList();
         _agent = GetComponent<NavMeshAgent>();
-        _gameManager = FindAnyObjectByType<GameManager>();
     }
 
     private void ApplySpeedMultiplier(){
@@ -37,12 +35,12 @@ public class GhostMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameManager.Last30SecondsStart += ApplySpeedMultiplier;
+        GameManager.instance.Last30SecondsStart += ApplySpeedMultiplier;
     }
 
     private void OnDisable()
     {
-        _gameManager.Last30SecondsStart -= ApplySpeedMultiplier;
+        GameManager.instance.Last30SecondsStart -= ApplySpeedMultiplier;
     }
 
     private void Start()
