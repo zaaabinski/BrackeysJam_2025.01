@@ -111,17 +111,14 @@ public class GameManager : MonoBehaviour
             Destroy(ghost);
         }
         _ghosts.Clear();
-        
-        // Add already existing buyers into their list
-        foreach (Transform child in buyerHolder.transform)
-        {
-            if (child.GetComponent<BuyersMovement>()){
-                _buyers.Add(child.gameObject);
-            }
-            else{
-                Debug.LogWarning("Something else than a buyer detected in the buyer holder");
-            }
+
+        // Destroy deactivated buyers from last time
+        foreach (GameObject buyer in _buyers){
+            if (buyer == null) continue;
+
+            Destroy(buyer);
         }
+        _buyers.Clear();
         
 
         howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn", 1);
