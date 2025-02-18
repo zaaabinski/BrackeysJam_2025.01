@@ -9,6 +9,8 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
     #region timer
 
     [Header("Timer Logic")]
@@ -59,6 +61,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (instance == null){
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this){
+            Destroy(gameObject);
+        }
+
         Initialize();
     }
 
