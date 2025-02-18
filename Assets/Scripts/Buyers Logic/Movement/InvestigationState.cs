@@ -12,7 +12,7 @@ public class InvestigationState : IBuyerState
 
     public void EnterState() {
         _buyer.MoveToAnomaly();
-        _buyer.ActivateScaredMark();
+        _buyer.ToggleScaredMark(true);
      }
 
     public void UpdateState()

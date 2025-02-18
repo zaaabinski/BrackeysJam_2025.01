@@ -114,6 +114,10 @@ public class BuyersMovement : MonoBehaviour
         Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadus);
         Collider[] anomalyNearbyColliders = nearbyColliders.Where(x => x.CompareTag("Anomaly")).ToArray();
 
+        // Filter out non-visible ones
+        
+
+        // Find the closest anomaly
         GameObject closestAnomaly = null;
         float closestDistance = int.MaxValue; // So I dont have to recheck the distance every time
 
@@ -149,8 +153,8 @@ public class BuyersMovement : MonoBehaviour
         _agent.SetDestination(_exit.transform.position);
     }
 
-    public void ActivateScaredMark(){
-        _scaredMark.SetActive(true);
+    public void ToggleScaredMark(bool status){
+        _scaredMark.SetActive(status);
     }
 
     public void LerpScaredMarkColor(){

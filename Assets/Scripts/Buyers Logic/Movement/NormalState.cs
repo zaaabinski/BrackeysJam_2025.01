@@ -10,7 +10,9 @@ public class NormalState : IBuyerState
         _buyer = buyer;
     }
 
-    public void EnterState() { }
+    public void EnterState() { 
+        _buyer.ToggleScaredMark(false);
+    }
 
     public void UpdateState()
     {
