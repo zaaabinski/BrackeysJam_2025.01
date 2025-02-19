@@ -11,16 +11,19 @@ public class ScaredState : IBuyerState
     {
         _buyer = buyer;
         _anomalyFollowing = _buyer.FindClosestAnomaly();
-
-        if (_anomalyFollowing == null){
-            Debug.LogError("The anomaly that the buyer follows cant be null");
-        }
     }
 
-    public void EnterState() { }
+    public void EnterState() {
+        if (_anomalyFollowing == null){
+            // This means that the anomaly it was investigating was removed by the player
+            _buyer.SetState(new NormalState(_buyer));
+        }
+     }
 
     public void UpdateState()
     {
+        Debug.Log(_anomalyFollowing);
+
         if (_buyer.FindClosestAnomaly() != _anomalyFollowing){
             _buyer.SetState(new NormalState(_buyer));
         }
