@@ -3219,7 +3219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512eb1da88dace446b020d7e37bb166d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startTime: 60
+  _startTime: 342
   timerText: {fileID: 1521417416}
   fearGap: 50
   generalFear: 0

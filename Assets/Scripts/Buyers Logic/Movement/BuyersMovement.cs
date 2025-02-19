@@ -144,13 +144,20 @@ public class BuyersMovement : MonoBehaviour
     {
         Vector3 direction = anomalyCollider.transform.position - _visibilityStartObject.position;
 
-        if (Physics.Raycast(_visibilityStartObject.position, direction, out RaycastHit hit, _anomalyDetectionRadus, _visibilityCheckMask))
+        if (anomalyCollider.bounds.Contains(_visibilityStartObject.position))
+        {
+            return true; // If starting point is inside the anomaly, it's considered visible
+            // THIS FIXED THE PROBLEM LETS FUCKIGN GO!!!!
+        }
+
+        if (Physics.SphereCast(_visibilityStartObject.position, 0.1f, direction, out RaycastHit hit, _anomalyDetectionRadus, _visibilityCheckMask))
         {
             return hit.collider == anomalyCollider;
         }
 
         return false;
     }
+
 
     public void MoveToAnomaly() {
         GameObject anomaly = FindClosestAnomaly();

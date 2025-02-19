@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8019924317151905323}
   - component: {fileID: 2269338122944038825}
   - component: {fileID: 6476592643294893496}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1 (1)
   m_TagString: AnomalyPoint
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 8289441330540019121}
   - component: {fileID: 6896174589873851286}
   - component: {fileID: 2431738173457108879}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1 (3)
   m_TagString: AnomalyPoint
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 2548934177362410256}
   - component: {fileID: 423519718844877994}
   - component: {fileID: 7174163296653973912}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1
   m_TagString: AnomalyPoint
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 6240904470760772413}
   - component: {fileID: 3665935760757383646}
   - component: {fileID: 8241460582801733617}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1 (2)
   m_TagString: AnomalyPoint
   m_Icon: {fileID: 0}
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 277569716938536958}
   - component: {fileID: 91932867416745848}
   - component: {fileID: 7171826544612163767}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1 (5)
   m_TagString: AnomalyPoint
   m_Icon: {fileID: 0}
@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 1025994420818087707}
   - component: {fileID: 5490171669693902755}
   - component: {fileID: 5070205620364984097}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 1 (4)
   m_TagString: AnomalyPoint
   m_Icon: {fileID: 0}
