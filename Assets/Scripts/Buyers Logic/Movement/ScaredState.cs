@@ -11,6 +11,10 @@ public class ScaredState : IBuyerState
     {
         _buyer = buyer;
         _anomalyFollowing = _buyer.FindClosestAnomaly();
+
+        if (_anomalyFollowing == null){
+            Debug.LogError("The anomaly that the buyer follows cant be null");
+        }
     }
 
     public void EnterState() { }

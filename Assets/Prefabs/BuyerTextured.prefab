@@ -217,6 +217,9 @@ MonoBehaviour:
   _scareTimeBeforeRunning: 3
   _anomalyDetectionRadus: 5
   _buyerSettings: {fileID: 11400000, guid: c9782a955ae0f2741b396edc6f24d9c4, type: 2}
+  _visibilityCheckMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!195 &7698729534048144026
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -481,7 +484,7 @@ Transform:
   m_GameObject: {fileID: 8173821082846996305}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.61, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -105,16 +105,15 @@ public class BuyersMovement : MonoBehaviour
         return !_agent.pathPending && _agent.remainingDistance <= 2f; 
     }
 
-    public bool CheckForAnomalies() {
-        Collider[] nearbyColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadus);
-        Collider[] anomalyNearbyColliders = nearbyColliders.Where(x => x.CompareTag("Anomaly")).ToArray();
-
-        return anomalyNearbyColliders.Length > 0;
+    public bool CheckForAnomalies()
+    {
+        return Physics.OverlapSphere(transform.position, _anomalyDetectionRadus)
+                    .Any(collider => collider.CompareTag("Anomaly") && IsAnomalyVisible(collider));
     }
+
 
     public GameObject FindClosestAnomaly()
     {
-        // Get all anomalies in detection radius
         var anomalyColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadus)
                                     .Where(x => x.CompareTag("Anomaly"))
                                     .ToArray();
@@ -124,7 +123,6 @@ public class BuyersMovement : MonoBehaviour
 
         foreach (var anomalyCollider in anomalyColliders)
         {
-            // Check if the anomaly is visible (not blocked by obstacles)
             if (IsAnomalyVisible(anomalyCollider))
             {
                 float distance = Vector3.Distance(transform.position, anomalyCollider.transform.position);
@@ -140,12 +138,13 @@ public class BuyersMovement : MonoBehaviour
         return closestAnomaly;
     }
 
-    // Helper method to check if anomaly is visible
+    [SerializeField] private LayerMask _visibilityCheckMask;
+
     private bool IsAnomalyVisible(Collider anomalyCollider)
     {
         Vector3 direction = anomalyCollider.transform.position - _visibilityStartObject.position;
 
-        if (Physics.Raycast(_visibilityStartObject.position, direction, out RaycastHit hit, _anomalyDetectionRadus))
+        if (Physics.Raycast(_visibilityStartObject.position, direction, out RaycastHit hit, _anomalyDetectionRadus, _visibilityCheckMask))
         {
             return hit.collider == anomalyCollider;
         }
@@ -155,10 +154,6 @@ public class BuyersMovement : MonoBehaviour
 
     public void MoveToAnomaly() {
         GameObject anomaly = FindClosestAnomaly();
-
-        if (anomaly == null){
-            return; // This means it wasnt visible via raycasting
-        }
 
          _agent.SetDestination(anomaly.transform.position);
     }
