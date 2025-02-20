@@ -15,7 +15,7 @@ public class ScaredState : IBuyerState
 
     public void EnterState() { 
         if (_anomalyFollowing == null){
-            Debug.LogError("The anomaly that the buyer follows cant be null");
+            _buyer.SetState(new NormalState(_buyer));
         }
     }
 

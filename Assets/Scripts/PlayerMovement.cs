@@ -46,13 +46,5 @@ public class PlayerController : MonoBehaviour
     {
         // Apply movement
         rb.linearVelocity = new Vector3(movement.x * moveSpeed, rb.linearVelocity.y, movement.z * moveSpeed);
-
-        // Camera follows the player
-        if (cameraTransform != null)
-        {
-            Vector3 camOffset = new Vector3(10, 10, -10); // Keeps the camera in position
-            cameraTransform.position = transform.position + camOffset;
-            cameraTransform.rotation = Quaternion.Euler(35, -45, 0); // Set fixed -45-degree angle
-        }
     }
 }
