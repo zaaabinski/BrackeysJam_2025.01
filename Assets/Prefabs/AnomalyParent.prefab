@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6657804956402959016}
   m_Layer: 0
   m_Name: AnomalyParent
-  m_TagString: Untagged
+  m_TagString: Anomaly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,6 +83,10 @@ PrefabInstance:
     - target: {fileID: 8310040602910836679, guid: 673fd5cc347b7b8478e7e8a8c72ac483, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8310040602910836679, guid: 673fd5cc347b7b8478e7e8a8c72ac483, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8506528440427080058, guid: 673fd5cc347b7b8478e7e8a8c72ac483, type: 3}
       propertyPath: m_LocalPosition.x
