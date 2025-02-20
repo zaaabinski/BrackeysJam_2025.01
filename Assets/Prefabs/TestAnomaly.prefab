@@ -249,10 +249,10 @@ GameObject:
   - component: {fileID: 6878275637749694070}
   - component: {fileID: 404784162803161283}
   - component: {fileID: 5854754134184849165}
-  - component: {fileID: 762563639723911686}
+  - component: {fileID: 6825321304903900557}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: AnomalyPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -325,7 +325,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &762563639723911686
+--- !u!135 &6825321304903900557
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
