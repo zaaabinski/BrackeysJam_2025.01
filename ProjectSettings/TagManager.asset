@@ -9,6 +9,7 @@ TagManager:
   - GetAway
   - Buyer
   - AnomalyPoint
+  - AnomalyParent
   layers:
   - Default
   - TransparentFX
