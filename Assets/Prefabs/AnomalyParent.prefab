@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2457751315643219774}
   - component: {fileID: 3360419940262737977}
   - component: {fileID: 6657804956402959016}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: AnomalyParent
-  m_TagString: Anomaly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf87a18b0ab3504090746d914599e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceForSpawn: 25
+  chanceForSpawn: 100
 --- !u!1001 &5643512948450251756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82,11 +82,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8310040602910836679, guid: 673fd5cc347b7b8478e7e8a8c72ac483, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8310040602910836679, guid: 673fd5cc347b7b8478e7e8a8c72ac483, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Anomaly
       objectReference: {fileID: 0}
     - target: {fileID: 8506528440427080058, guid: 673fd5cc347b7b8478e7e8a8c72ac483, type: 3}
       propertyPath: m_LocalPosition.x
