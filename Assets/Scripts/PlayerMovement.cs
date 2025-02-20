@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5f; // Player movement speed
     [SerializeField] private Transform cameraTransform; // Assign the camera in the inspector
-    
+    [SerializeField] private Animator animator;
     private Vector3 movement;
     private Rigidbody rb;
 
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         right.Normalize();
         
         movement = (forward * input.y + right * input.x).normalized;
-
+        animator.SetFloat("Speed", movement.magnitude);
         // Rotate player to face movement direction
         if (movement.magnitude > 0.1f)
         {
@@ -50,9 +50,9 @@ public class PlayerController : MonoBehaviour
         // Camera follows the player
         if (cameraTransform != null)
         {
-            Vector3 camOffset = new Vector3(10, 8, -10); // Keeps the camera in position
+            Vector3 camOffset = new Vector3(10, 10, -10); // Keeps the camera in position
             cameraTransform.position = transform.position + camOffset;
-            cameraTransform.rotation = Quaternion.Euler(25, -45, 0); // Set fixed -45-degree angle
+            cameraTransform.rotation = Quaternion.Euler(35, -45, 0); // Set fixed -45-degree angle
         }
     }
 }
