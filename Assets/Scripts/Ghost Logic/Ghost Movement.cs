@@ -25,8 +25,28 @@ public class GhostMovement : MonoBehaviour
 
     private void Awake()
     {
-        anomalyPoints = GameObject.FindGameObjectsWithTag("AnomalyPoint").ToList();
         _agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        LoadAnomalyPoints();
+        StartCoroutine(RandomAnomalyDestination());
+    }
+
+    private void LoadAnomalyPoints()
+    {
+        anomalyPoints.Clear();
+
+        GameObject[] allObjects = FindObjectsByType<GameObject>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.CompareTag("AnomalyPoint"))
+            {
+                anomalyPoints.Add(obj);
+            }
+        }
     }
 
     private void ApplySpeedMultiplier(){
@@ -41,11 +61,6 @@ public class GhostMovement : MonoBehaviour
     private void OnDisable()
     {
         GameManager.instance.Last30SecondsStart -= ApplySpeedMultiplier;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(RandomAnomalyDestination());
     }
 
     private void Update()
