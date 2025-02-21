@@ -6,6 +6,7 @@ public class ScaredState : IBuyerState
     public BuyerStateType StateType => BuyerStateType.Scared;
 
     private GameObject _anomalyFollowing;
+    private AnomalyScript _anomalyScript;
 
     public ScaredState(BuyersMovement buyer)
     {
@@ -17,11 +18,23 @@ public class ScaredState : IBuyerState
         if (_anomalyFollowing == null){
             _buyer.SetState(new NormalState(_buyer));
         }
+
+        _anomalyScript = _anomalyFollowing.GetComponent<AnomalyScript>();
+
+        if (_anomalyScript.anomalyActive == false)
+        {
+            _buyer.SetState(new NormalState(_buyer));
+        }
     }
 
     public void UpdateState()
     {
-        if (_buyer.FindClosestAnomaly() != _anomalyFollowing){
+        if (_anomalyScript.anomalyActive == false)
+        {
+            _buyer.SetState(new NormalState(_buyer));
+        }
+
+        if ((_buyer.FindClosestAnomaly() != _anomalyFollowing)){
             _buyer.SetState(new NormalState(_buyer));
         }
 

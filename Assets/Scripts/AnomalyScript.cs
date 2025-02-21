@@ -22,34 +22,37 @@ public class AnomalyScript : MonoBehaviour
 
     #region private variables
 
-    private bool anomalyActive = true;
     private bool isPlayerInRange = false;
 
     #endregion
+    
+    public bool anomalyActive = true;
 
+    #region animation
+    [SerializeField] private Animator anomalyAnimator;
+    [SerializeField] private ParticleSystem anomalyParticles;
+    #endregion
+    
     private void Awake()
     {
         _interactionReference.action.Enable();
+        /*Invoke("StartAnomaly",1);
+        anomalyActive = true;*/
     }
 
     private void Update()
     {
         bool keyPressed = _interactionReference.action.ReadValue<float>() == 1;
 
-        if (keyPressed && isPlayerInRange)
+        if (keyPressed && isPlayerInRange && anomalyActive)
         {
-            isPlayerInRange = false;
-            infoText.SetActive(false);
-            GameObject particles =  Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
-            Destroy(particles,1f);
-            Debug.Log("Deactivating anomaly: " + gameObject.name);
-            gameObject.SetActive(false);
+            StopAnomaly();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && anomalyActive)
         {
             isPlayerInRange = true;
             infoText.SetActive(true);
@@ -64,4 +67,22 @@ public class AnomalyScript : MonoBehaviour
             infoText.SetActive(false);
         }
     }
+
+    public void StartAnomaly()
+    {
+        anomalyAnimator.SetBool("Start",true);
+        anomalyParticles.Play();
+    }
+
+    private void StopAnomaly()
+    {
+        isPlayerInRange = false;
+        infoText.SetActive(false);
+        GameObject particles =  Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
+        Destroy(particles,1f);
+        anomalyActive = false;
+        anomalyAnimator.SetBool("Start", false);
+        anomalyParticles.Stop();
+    }
+    
 }
