@@ -17,7 +17,6 @@ public class AnomalyActivation : MonoBehaviour
                 foreach (Transform child in transform)
                 {
                     AnomalyScript anomalyScript = child.GetComponent<AnomalyScript>();
-                    anomalyScript.anomalyActive = true;
                     anomalyScript.StartAnomaly();
                 }
             }
