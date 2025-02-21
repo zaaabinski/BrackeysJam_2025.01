@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2686886771613579165}
   - component: {fileID: 8374710127825150860}
   - component: {fileID: 7616286535449695277}
+  - component: {fileID: 4188463278310429790}
   m_Layer: 10
   m_Name: s1_LivingWalls_v3 1
   m_TagString: Untagged
@@ -127,6 +128,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7643058688034238484, guid: 2b23722875c41044992456213554ce0d, type: 3}
+--- !u!65 &4188463278310429790
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4488190213550937672}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.100018, y: 1, z: 10.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4904819138360018844
 GameObject:
   m_ObjectHideFlags: 0
