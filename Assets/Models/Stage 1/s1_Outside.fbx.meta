@@ -8,12 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Atlas
-    second: {fileID: 2100000, guid: aa614b5ac0fc236409bdc05334a12644, type: 2}
+    second: {fileID: 2100000, guid: 2f9c706ea9bff804db07db04abd43088, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bright
+    second: {fileID: 2100000, guid: 0a77616a6bfd4f745856e9a9c0e7c903, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Wall_Floors
-    second: {fileID: 2100000, guid: 8f968b08fcd746345b80ee1ca8b7830d, type: 2}
+    second: {fileID: 2100000, guid: 78ec391a4321a844986a05508277985d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
