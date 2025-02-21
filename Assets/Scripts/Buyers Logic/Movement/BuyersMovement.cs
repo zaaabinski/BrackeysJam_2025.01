@@ -46,12 +46,14 @@ public class BuyersMovement : MonoBehaviour
     [SerializeField] private float _scareTimeBeforeRunning;
     [SerializeField] private float _anomalyDetectionRadus;
     [SerializeField] private BuyersSettings _buyerSettings;
+    [SerializeField] private float _resumeMovingDelay;
 
     #endregion
 
     #region state tracking variables
 
     private float _scaredTimer;
+    private bool _isPickingDestination;
 
     #endregion
 
@@ -96,10 +98,25 @@ public class BuyersMovement : MonoBehaviour
 
     // Behavior functions (called by states)
 
-    public void PickRandomDestination() { 
+    public void PickRandomDestination()
+    {
+        StartCoroutine(DelayBeforePickingRandomDestination());
+    }
+
+    private IEnumerator DelayBeforePickingRandomDestination() {
+        if (_isPickingDestination)
+        {
+            yield break;
+        }
+
+        _isPickingDestination = true;
+        yield return new WaitForSeconds(_resumeMovingDelay);
+
         Vector3 randomDestination = _navmeshUtilities.GetRandomPointOnNavmesh(_navmeshSurface);
         anim.SetTrigger("Walking");
         _agent.SetDestination(randomDestination);
+
+        _isPickingDestination = false;
     }
 
     public bool HasReachedDestination() { 
