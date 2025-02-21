@@ -17,6 +17,7 @@ public class ScaredState : IBuyerState
     public void EnterState() { 
         if (_anomalyFollowing == null){
             _buyer.SetState(new NormalState(_buyer));
+            return;
         }
 
         _anomalyScript = _anomalyFollowing.GetComponent<AnomalyScript>();
