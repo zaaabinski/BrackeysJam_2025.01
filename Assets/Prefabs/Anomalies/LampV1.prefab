@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chanceForSpawn: 100
+  _delayBeforeApplyingAnomaly: 2
 --- !u!1 &4117408981561699812
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,9 +408,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionReference: {fileID: -3532555311144421995, guid: 1169589c98906314ca7426f05321185e, type: 3}
+  _anomalyProtectionTime: 3
   infoText: {fileID: 4324210334641265330}
   anomalyGoneParticles: {fileID: 8741868904249392435, guid: d89625c2e4070164a80fc55e3d0880d2, type: 3}
   anomalyActive: 1
+  _anomalyProtected: 0
   anomalyAnimator: {fileID: 0}
   anomalyParticles: {fileID: 0}
 --- !u!1 &6902676764162710504

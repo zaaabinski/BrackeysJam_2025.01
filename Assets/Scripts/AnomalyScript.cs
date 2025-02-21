@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,7 @@ public class AnomalyScript : MonoBehaviour
     [Header("Settings")]
 
     [SerializeField] private InputActionReference _interactionReference;
+    [SerializeField] private float _anomalyProtectionTime;
 
     #endregion
 
@@ -27,6 +29,7 @@ public class AnomalyScript : MonoBehaviour
     #endregion
     
     public bool anomalyActive = true;
+    public bool _anomalyProtected = false;
     
     #region animation
     [SerializeField] private Animator anomalyAnimator;
@@ -71,8 +74,22 @@ public class AnomalyScript : MonoBehaviour
 
     public void StartAnomaly()
     {
+        if (_anomalyProtected) return;
+
+        anomalyActive = true;
         anomalyAnimator.SetBool("Start",true);
         anomalyParticles.Play();
+
+        StartCoroutine(ProtectAnomaly());
+    }
+
+    private IEnumerator ProtectAnomaly()
+    {
+        _anomalyProtected = true;
+
+        yield return new WaitForSeconds(_anomalyProtectionTime);
+
+        _anomalyProtected = false;
     }
 
     private void StopAnomaly()

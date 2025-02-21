@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5796165747521918099}
   - component: {fileID: 6520830353307310231}
   - component: {fileID: 83110875410180189}
+  - component: {fileID: -3919775719474981427}
   m_Layer: 6
   m_Name: GhostTextured
   m_TagString: Ghost
@@ -177,6 +178,28 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &-3919775719474981427
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6441617696671549818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04d919b2fcefa294fbde03678f0679c2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &4768197865652646870
 PrefabInstance:
   m_ObjectHideFlags: 0
