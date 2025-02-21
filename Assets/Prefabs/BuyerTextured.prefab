@@ -132,6 +132,7 @@ MonoBehaviour:
   _anomalyDetectionRadus: 5
   _buyerSettings: {fileID: 11400000, guid: c9782a955ae0f2741b396edc6f24d9c4, type: 2}
   _resumeMovingDelay: 2
+  _speed: 3.5
   anim: {fileID: 0}
   _visibilityCheckMask:
     serializedVersion: 2

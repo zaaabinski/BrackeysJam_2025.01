@@ -47,6 +47,7 @@ public class BuyersMovement : MonoBehaviour
     [SerializeField] private float _anomalyDetectionRadus;
     [SerializeField] private BuyersSettings _buyerSettings;
     [SerializeField] private float _resumeMovingDelay;
+    [SerializeField] private float _speed = 3.5f;
 
     #endregion
 
@@ -90,6 +91,8 @@ public class BuyersMovement : MonoBehaviour
 
     public void SetState(IBuyerState newState)
     {
+        CloseCoroutine();
+
         _currentState?.ExitState();
         _currentState = newState;
         _currentState.EnterState();
@@ -114,13 +117,27 @@ public class BuyersMovement : MonoBehaviour
 
         _isPickingDestination = true;
         yield return new WaitForSeconds(_resumeMovingDelay);
-        _agent.speed = 3.5f;
+
+        if (CurrentState != BuyerStateType.Normal)
+        {
+            CloseCoroutine();
+            yield break;
+        }
+
+        _agent.speed = _speed;
 
         Vector3 randomDestination = _navmeshUtilities.GetRandomPointOnNavmesh(_navmeshSurface);
         anim.SetTrigger("Walking");
         _agent.SetDestination(randomDestination);
 
         _isPickingDestination = false;
+    }
+
+    private void CloseCoroutine()
+    {
+        StopAllCoroutines();
+        _isPickingDestination = false;
+        _agent.speed = _speed;
     }
 
     public bool HasReachedDestination() { 
