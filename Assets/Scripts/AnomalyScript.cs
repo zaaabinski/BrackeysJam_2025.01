@@ -36,6 +36,7 @@ public class AnomalyScript : MonoBehaviour
     private void Awake()
     {
         _interactionReference.action.Enable();
+        anomalyAnimator = gameObject.GetComponentInChildren<Animator>();
         /*Invoke("StartAnomaly",1);
         anomalyActive = true;*/
     }
