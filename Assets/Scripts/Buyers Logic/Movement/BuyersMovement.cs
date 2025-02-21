@@ -109,6 +109,8 @@ public class BuyersMovement : MonoBehaviour
             yield break;
         }
 
+        anim.SetTrigger("Looking");
+
         _isPickingDestination = true;
         yield return new WaitForSeconds(_resumeMovingDelay);
 

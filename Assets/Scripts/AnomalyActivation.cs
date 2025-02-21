@@ -19,6 +19,9 @@ public class AnomalyActivation : MonoBehaviour
 
     private IEnumerator ApplyAnomaly(GameObject ghost)
     {
+        // Animation to ghost
+        ghost.GetComponent<Animator>().SetTrigger("Anomaly");
+
         // Freeze ghost
         NavMeshAgent agent = ghost.GetComponent<NavMeshAgent>();
 
