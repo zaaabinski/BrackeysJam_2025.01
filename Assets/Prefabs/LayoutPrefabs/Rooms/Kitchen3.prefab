@@ -364,9 +364,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5972795361512366024, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: _anomalyProtectionTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6393338090199934754, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
       propertyPath: m_Name
       value: AnomalyParent (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950965770668197982, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: _delayBeforeApplyingAnomaly
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
