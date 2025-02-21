@@ -108,11 +108,13 @@ public class BuyersMovement : MonoBehaviour
         {
             yield break;
         }
-
+        
         anim.SetTrigger("Looking");
+        _agent.speed = 0;
 
         _isPickingDestination = true;
         yield return new WaitForSeconds(_resumeMovingDelay);
+        _agent.speed = 3.5f;
 
         Vector3 randomDestination = _navmeshUtilities.GetRandomPointOnNavmesh(_navmeshSurface);
         anim.SetTrigger("Walking");
