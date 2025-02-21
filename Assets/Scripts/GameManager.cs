@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Timer Logic")]
     [SerializeField] private float _startTime;
-    [NonSerialized] public float _timer;
+     public float _timer;
     [SerializeField] private TextMeshProUGUI timerText;
 
     public event Action Last30SecondsStart;
