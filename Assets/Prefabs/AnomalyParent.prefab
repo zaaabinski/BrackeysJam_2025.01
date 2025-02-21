@@ -308,9 +308,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactionReference: {fileID: -3532555311144421995, guid: 1169589c98906314ca7426f05321185e, type: 3}
+  _anomalyProtectionTime: 0
   infoText: {fileID: 2096314889083571116}
   anomalyGoneParticles: {fileID: 8741868904249392435, guid: d89625c2e4070164a80fc55e3d0880d2, type: 3}
   anomalyActive: 0
+  _anomalyProtected: 0
   anomalyAnimator: {fileID: 0}
   anomalyParticles: {fileID: 69805931536385234}
 --- !u!1 &6393338090199934754
@@ -382,6 +384,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chanceForSpawn: 100
+  _delayBeforeApplyingAnomaly: 0
 --- !u!65 &2063058059516602130
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -401,7 +404,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 2, z: 1}
+  m_Size: {x: 0.7, y: 1.4, z: 0.7}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7130200001486544183
 GameObject:
