@@ -14,7 +14,9 @@ public class ScaredState : IBuyerState
         _anomalyFollowing = _buyer.FindClosestAnomaly();
     }
 
-    public void EnterState() { 
+    public void EnterState() {
+        _buyer.LerpScaredMarkColor();
+
         if (_anomalyFollowing == null){
             _buyer.SetState(new NormalState(_buyer));
             return;
