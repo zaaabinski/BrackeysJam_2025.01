@@ -135,7 +135,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   _visibilityCheckMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1025
 --- !u!195 &7698729534048144026
 NavMeshAgent:
   m_ObjectHideFlags: 0

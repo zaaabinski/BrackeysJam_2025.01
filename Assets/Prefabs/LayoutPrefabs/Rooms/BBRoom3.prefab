@@ -376,6 +376,30 @@ PrefabInstance:
       propertyPath: _anomalyProtectionTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6014475916791070942, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.37287527
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014475916791070942, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.08608504
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014475916791070942, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.90020055
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014475916791070942, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.20782767
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014475916791070942, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0000003209481
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014475916791070942, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 135
+      objectReference: {fileID: 0}
     - target: {fileID: 6393338090199934754, guid: 7583d47de6abfe24195d5c6b4a39f636, type: 3}
       propertyPath: m_Name
       value: AnomalyParent (1)
