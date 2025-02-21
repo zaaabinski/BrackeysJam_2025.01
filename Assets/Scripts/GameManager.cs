@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
             GameObject newBuyer = Instantiate(_buyerPrefab, new Vector3(0,1,-9), Quaternion.identity);
             rabbitsIconList[i].SetActive(true);
             _buyers.Add(newBuyer);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(60f);
         }
     }
     
