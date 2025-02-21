@@ -204,5 +204,10 @@ public class BuyersMovement : MonoBehaviour
     public void LerpScaredMarkColor(){
         float normalizedScaredTimer = _scaredTimer / _scareTimeBeforeRunning;
         _scaredMark.GetComponent<Renderer>().material.color = _buyerSettings.ScaredMarkGradient.Evaluate(normalizedScaredTimer);
+
+        foreach (Transform child in _scaredMark.transform)
+        {
+            child.GetComponent<Renderer>().material.color = _buyerSettings.ScaredMarkGradient.Evaluate(normalizedScaredTimer);
+        }
     }
 }
