@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e1f79b97e5b01b40bd2c0625d8ddb92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scaredMark: {fileID: 6028523254003728839}
   _exit: {fileID: 0}
   _scareTimeBeforeRunning: 3
   _anomalyDetectionRadus: 5

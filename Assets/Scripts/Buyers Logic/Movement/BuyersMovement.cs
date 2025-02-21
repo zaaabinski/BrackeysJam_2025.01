@@ -117,7 +117,7 @@ public class BuyersMovement : MonoBehaviour
         var anomalyColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadus)
                                     .Where(x => x.CompareTag("Anomaly"))
                                     .ToArray();
-
+        
         GameObject closestAnomaly = null;
         float closestDistance = float.MaxValue;
 
@@ -143,7 +143,7 @@ public class BuyersMovement : MonoBehaviour
     private bool IsAnomalyVisible(Collider anomalyCollider)
     {
         Vector3 direction = anomalyCollider.transform.position - _visibilityStartObject.position;
-
+        AnomalyScript anomalyScript = anomalyCollider.gameObject.GetComponent<AnomalyScript>();
         if (anomalyCollider.bounds.Contains(_visibilityStartObject.position))
         {
             return true; // If starting point is inside the anomaly, it's considered visible
@@ -152,7 +152,7 @@ public class BuyersMovement : MonoBehaviour
 
         if (Physics.SphereCast(_visibilityStartObject.position, 0.1f, direction, out RaycastHit hit, _anomalyDetectionRadus, _visibilityCheckMask))
         {
-            return hit.collider == anomalyCollider;
+            return hit.collider == anomalyCollider && anomalyScript.anomalyActive;
         }
 
         return false;
