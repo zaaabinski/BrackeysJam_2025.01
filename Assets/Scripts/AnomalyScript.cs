@@ -19,29 +19,29 @@ public class AnomalyScript : MonoBehaviour
 
     [SerializeField] private GameObject infoText;
     [SerializeField] private GameObject anomalyGoneParticles;
+    private Collider _anomalyCollider; // Added reference to the collider
 
     #endregion
 
-    #region private variables
+    #region Private Variables
 
     private bool isPlayerInRange = false;
 
     #endregion
-    
+
     public bool anomalyActive = true;
     public bool _anomalyProtected = false;
-    
-    #region animation
+
+    #region Animation
     [SerializeField] private Animator anomalyAnimator;
     [SerializeField] private ParticleSystem anomalyParticles;
     #endregion
-    
+
     private void Awake()
     {
         _interactionReference.action.Enable();
         anomalyAnimator = gameObject.GetComponentInChildren<Animator>();
-        /*Invoke("StartAnomaly",1);
-        anomalyActive = true;*/
+        _anomalyCollider = GetComponent<Collider>(); // Get the collider reference
     }
 
     private void Update()
@@ -77,18 +77,18 @@ public class AnomalyScript : MonoBehaviour
         if (_anomalyProtected) return;
 
         anomalyActive = true;
-        anomalyAnimator.SetBool("Start",true);
+        anomalyAnimator.SetBool("Start", true);
         anomalyParticles.Play();
 
         StartCoroutine(ProtectAnomaly());
+
+        StartCoroutine(RefreshTrigger()); // Refresh the trigger collider
     }
 
     private IEnumerator ProtectAnomaly()
     {
         _anomalyProtected = true;
-
         yield return new WaitForSeconds(_anomalyProtectionTime);
-
         _anomalyProtected = false;
     }
 
@@ -96,11 +96,20 @@ public class AnomalyScript : MonoBehaviour
     {
         isPlayerInRange = false;
         infoText.SetActive(false);
-        GameObject particles =  Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
-        Destroy(particles,1f);
+        GameObject particles = Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
+        Destroy(particles, 1f);
         anomalyActive = false;
         anomalyAnimator.SetBool("Start", false);
         anomalyParticles.Stop();
     }
-    
+
+    private IEnumerator RefreshTrigger()
+    {
+        if (_anomalyCollider != null)
+        {
+            _anomalyCollider.enabled = false;
+            yield return new WaitForSeconds(0.1f); // Small delay
+            _anomalyCollider.enabled = true;
+        }
+    }
 }
