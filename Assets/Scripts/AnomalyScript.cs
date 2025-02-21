@@ -27,7 +27,7 @@ public class AnomalyScript : MonoBehaviour
     #endregion
     
     public bool anomalyActive = true;
-
+    
     #region animation
     [SerializeField] private Animator anomalyAnimator;
     [SerializeField] private ParticleSystem anomalyParticles;

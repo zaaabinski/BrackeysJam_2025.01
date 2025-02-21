@@ -12,6 +12,7 @@ public class NormalState : IBuyerState
 
     public void EnterState() { 
         _buyer.ToggleScaredMark(false);
+        _buyer.anim.SetTrigger("Walking");
     }
 
     public void UpdateState()

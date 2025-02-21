@@ -11,6 +11,7 @@ public class EscapingState : IBuyerState
     }
 
     public void EnterState() {
+        _buyer.anim.SetTrigger("Running");
         _buyer.RetargetToExit();
      }
 
