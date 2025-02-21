@@ -3813,6 +3813,7 @@ MonoBehaviour:
   _buyerPrefab: {fileID: 2354161386839153891, guid: 721254d7d3c7f1f41bc61eab74924136, type: 3}
   howManyGhostToSpawn: 1
   ghostPrefab: {fileID: 6441617696671549818, guid: 27d0cfd7c4bf55d44802cf7b9651211d, type: 3}
+  _buyers: []
 --- !u!1 &2065465363
 GameObject:
   m_ObjectHideFlags: 0

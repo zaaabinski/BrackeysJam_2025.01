@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     private int _amountOfBuyersToSpawn = 1;
 
     private List<GameObject> _ghosts = new();
-    private List<GameObject> _buyers = new();
+    public List<GameObject> _buyers = new();
 
     #endregion
 
