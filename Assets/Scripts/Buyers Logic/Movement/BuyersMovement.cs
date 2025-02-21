@@ -108,7 +108,7 @@ public class BuyersMovement : MonoBehaviour
     public bool CheckForAnomalies()
     {
         return Physics.OverlapSphere(transform.position, _anomalyDetectionRadus)
-                    .Any(collider => collider.CompareTag("Anomaly") && IsAnomalyVisible(collider));
+                    .Any(collider => collider.CompareTag("Anomaly") && IsAnomalyVisible(collider) && collider.GetComponent<AnomalyScript>().anomalyActive);
     }
 
 
@@ -117,6 +117,8 @@ public class BuyersMovement : MonoBehaviour
         var anomalyColliders = Physics.OverlapSphere(transform.position, _anomalyDetectionRadus)
                                     .Where(x => x.CompareTag("Anomaly"))
                                     .ToArray();
+
+        anomalyColliders = anomalyColliders.Where(x => x.GetComponent<AnomalyScript>().anomalyActive).ToArray();
         
         GameObject closestAnomaly = null;
         float closestDistance = float.MaxValue;
