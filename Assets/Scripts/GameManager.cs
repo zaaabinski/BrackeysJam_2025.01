@@ -44,19 +44,24 @@ public class GameManager : MonoBehaviour
 
     [Header("Buyer and ghost spawning settings")]
 
-    [SerializeField] private int _buyersIncrementPerLevel;
+    //[SerializeField] private int _buyersIncrementPerLevel;
     [SerializeField] private GameObject _buyerPrefab;
     
     [SerializeField] private int howManyGhostToSpawn = 1;
     [SerializeField] private GameObject ghostPrefab;
 
-    private int _amountOfBuyersToSpawn = 1;
+    private int _amountOfBuyersToSpawn = 3;
 
     private List<GameObject> _ghosts = new();
     public List<GameObject> _buyers = new();
 
     #endregion
 
+    #region rabbit Icons
+    [SerializeField] private GameObject[] rabbitsIconList;
+    [SerializeField] private Sprite runAwayIcon;
+    #endregion
+    
     private bool isGameOver = false;
 
     void Start()
@@ -119,7 +124,7 @@ public class GameManager : MonoBehaviour
         _buyers.Clear();
         
         howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn", 1);
-        _amountOfBuyersToSpawn = PlayerPrefs.GetInt("amountOfBuyersToSpawn", 1);
+        _amountOfBuyersToSpawn = 3;
 
         SpawnGhosts(howManyGhostToSpawn);
         //SpawnBuyers(_amountOfBuyersToSpawn);
@@ -146,15 +151,17 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < amount; i++){
             GameObject newBuyer = Instantiate(_buyerPrefab, new Vector3(0,1,-9), Quaternion.identity);
+            rabbitsIconList[i].SetActive(true);
             _buyers.Add(newBuyer);
-            yield return new WaitForSeconds(60f);
+            yield return new WaitForSeconds(3f);
         }
     }
     
     public void RemoveBuyer(GameObject buyer)
     {
+        rabbitsIconList[_buyers.Count - 1].GetComponent<Image>().sprite = runAwayIcon;
         _buyers.Remove(buyer);
-
+        
         if(_buyers.Count == 0 && !isGameOver){
             GameOver();
         }
@@ -163,10 +170,8 @@ public class GameManager : MonoBehaviour
     private void LevelComplete()
     {
         howManyGhostToSpawn += _buyers.Count;
-        _amountOfBuyersToSpawn += _buyersIncrementPerLevel;
 
         PlayerPrefs.SetInt("howManyGhostToSpawn", howManyGhostToSpawn);
-        PlayerPrefs.SetInt("amountOfBuyersToSpawn", _amountOfBuyersToSpawn);
 
         winScreenPanel.SetActive(true);
 
