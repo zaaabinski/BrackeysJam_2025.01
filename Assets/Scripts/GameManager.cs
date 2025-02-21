@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using TMPro;
-using UnityEngine.Serialization;
-using UnityEditor.Toolbars;
 using System;
 
 public class GameManager : MonoBehaviour
@@ -15,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Timer Logic")]
     [SerializeField] private float _startTime;
-     public float _timer;
+    public float _timer;
     [SerializeField] private TextMeshProUGUI timerText;
 
     public event Action Last30SecondsStart;
