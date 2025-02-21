@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ChangeTransparency : MonoBehaviour
@@ -6,12 +7,31 @@ public class ChangeTransparency : MonoBehaviour
     [SerializeField] private Material origin1;
     [SerializeField] private Material origin2;
     [SerializeField] private Material transparent;
-
+    
+    private bool isPlayerInRoom = false;
     private bool isTransparent = false;
 
     void Start()
     {
         meshRenderer = GetComponent<MeshRenderer>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRoom = true;
+            ChangeToTransparent(); // Make sure walls stay transparent in rooms
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInRoom = false;
+            RestoreOriginal(); // Restore walls when leaving a room
+        }
     }
 
     public void ChangeToTransparent()
@@ -28,7 +48,7 @@ public class ChangeTransparency : MonoBehaviour
 
     public void RestoreOriginal()
     {
-        if (!isTransparent) return; // Avoid unnecessary calls
+        if (!isTransparent || isPlayerInRoom) return; // Avoid unnecessary calls or restoring while in a room
 
         Material[] mats = meshRenderer.materials;
         mats[0] = origin1;
@@ -36,5 +56,10 @@ public class ChangeTransparency : MonoBehaviour
         meshRenderer.materials = mats;
 
         isTransparent = false;
+    }
+
+    public bool IsPlayerInRoom()
+    {
+        return isPlayerInRoom;
     }
 }

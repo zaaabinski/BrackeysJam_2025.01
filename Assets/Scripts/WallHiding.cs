@@ -9,13 +9,19 @@ public class WallHiding : MonoBehaviour
 
     void Update()
     {
+        if (player == null) return;
+
+        // Don't change transparency if the player is in a room
+        if (lastObstruction != null && lastObstruction.IsPlayerInRoom())
+        {
+            return;
+        }
+
         DetectObstruction();
     }
 
     void DetectObstruction()
     {
-        if (player == null) return;
-
         Vector3 cameraPos = transform.position;
         Vector3 direction = (player.position - cameraPos).normalized;
         float distance = Vector3.Distance(player.position, cameraPos);
@@ -29,7 +35,7 @@ public class WallHiding : MonoBehaviour
             if (changeTransparency != null && changeTransparency != lastObstruction)
             {
                 // Restore the last obstruction if it's different
-                if (lastObstruction != null)
+                if (lastObstruction != null && !lastObstruction.IsPlayerInRoom())
                 {
                     lastObstruction.RestoreOriginal();
                 }
@@ -39,7 +45,7 @@ public class WallHiding : MonoBehaviour
                 lastObstruction = changeTransparency;
             }
         }
-        else if (lastObstruction != null)
+        else if (lastObstruction != null && !lastObstruction.IsPlayerInRoom())
         {
             // Restore the last obstruction when no object is blocking
             lastObstruction.RestoreOriginal();

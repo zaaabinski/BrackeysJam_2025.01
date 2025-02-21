@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 8774457343339354379}
   - component: {fileID: 3766540397443111318}
   - component: {fileID: 4958387570906797676}
+  - component: {fileID: 1928754366116211342}
   m_Layer: 10
   m_Name: s1_Bedroom1Walls_v1
   m_TagString: Untagged
@@ -207,6 +208,27 @@ MonoBehaviour:
   origin1: {fileID: -4586444591600750072, guid: 1c39c7e3346088d42a221cd7c7e0abee, type: 3}
   origin2: {fileID: -9003160957285704528, guid: 97d2c9b4b8b59a84e9bcbcfe173530a9, type: 3}
   transparent: {fileID: 2100000, guid: 4b7d4d2f65914ba4183abe92840e12f7, type: 2}
+--- !u!65 &1928754366116211342
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3046066232066879449}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.100018, y: 1, z: 10.100002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3679295693149535771
 GameObject:
   m_ObjectHideFlags: 0
