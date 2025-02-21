@@ -1040,7 +1040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0
@@ -1052,7 +1052,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1325,6 +1325,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e11072914bcc529458ac9a22ce8bd452, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e11072914bcc529458ac9a22ce8bd452, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f5b402d9b494da4094fd0f1ac934b32, type: 2}
     - target: {fileID: 919132149155446097, guid: e11072914bcc529458ac9a22ce8bd452, type: 3}
       propertyPath: m_Name
       value: s1_Outside
@@ -1495,6 +1503,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a44c52a1e457fb140a51e18afd69c178, type: 3}
       insertIndex: -1
       addedObject: {fileID: 912407045}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a44c52a1e457fb140a51e18afd69c178, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 912407046}
   m_SourcePrefab: {fileID: 100100000, guid: a44c52a1e457fb140a51e18afd69c178, type: 3}
 --- !u!4 &725904540 stripped
 Transform:
@@ -1972,6 +1983,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &912407046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912407044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 0.5622641, g: 0.30349484, b: 0, a: 1}
+  outlineWidth: 1.5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &922057735
 GameObject:
   m_ObjectHideFlags: 0
