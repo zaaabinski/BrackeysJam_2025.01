@@ -57,13 +57,14 @@ public class BuyersMovement : MonoBehaviour
 
     private IBuyerState _currentState;
     public BuyerStateType CurrentState => _currentState.StateType;
-
+    public Animator anim;
     private void Awake()
     {
         _navmeshUtilities = FindAnyObjectByType<NavmeshUtilities>();
         _navmeshSurface = FindAnyObjectByType<NavMeshSurface>();
         _agent = GetComponent<NavMeshAgent>();
         _exit = FindAnyObjectByType<GetAwayIdentifier>().gameObject;
+        anim = GetComponentInChildren<Animator>();
         _scaredMark = transform.Find("ScaredMark").gameObject;
         _visibilityStartObject = transform.Find("VisibilityStartObject");
     }
@@ -97,7 +98,7 @@ public class BuyersMovement : MonoBehaviour
 
     public void PickRandomDestination() { 
         Vector3 randomDestination = _navmeshUtilities.GetRandomPointOnNavmesh(_navmeshSurface);
-
+        anim.SetTrigger("Walking");
         _agent.SetDestination(randomDestination);
     }
 
