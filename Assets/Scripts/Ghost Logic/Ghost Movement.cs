@@ -17,7 +17,7 @@ public class GhostMovement : MonoBehaviour
     [Header("Settings")]
     public float resumeMovingDelay;
     public float stoppingRadius = 2f; // Ghost stops within this radius instead of exact point
-
+    
     [Tooltip("The last 30 seconds the ghost speed gets multiplied by this value")]
     [SerializeField] private float _speedMultiplier;
 
@@ -73,6 +73,7 @@ public class GhostMovement : MonoBehaviour
 
     private IEnumerator RandomAnomalyDestination()
     {
+        
         yield return new WaitForSeconds(resumeMovingDelay);
 
         Vector3 targetPoint = anomalyPoints[Random.Range(0, anomalyPoints.Count)].transform.position;
