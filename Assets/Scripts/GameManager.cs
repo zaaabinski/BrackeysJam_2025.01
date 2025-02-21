@@ -122,8 +122,8 @@ public class GameManager : MonoBehaviour
         _amountOfBuyersToSpawn = PlayerPrefs.GetInt("amountOfBuyersToSpawn", 1);
 
         SpawnGhosts(howManyGhostToSpawn);
-        SpawnBuyers(_amountOfBuyersToSpawn);
-        
+        //SpawnBuyers(_amountOfBuyersToSpawn);
+        StartCoroutine(SpawnForBuyers(_amountOfBuyersToSpawn));
         StartCoroutine(ReduceTime());
     }
 
@@ -142,6 +142,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator SpawnForBuyers(int amount)
+    {
+        for (int i = 0; i < amount; i++){
+            GameObject newBuyer = Instantiate(_buyerPrefab, new Vector3(0,1,-9), Quaternion.identity);
+            _buyers.Add(newBuyer);
+            yield return new WaitForSeconds(60f);
+        }
+    }
+    
     public void RemoveBuyer(GameObject buyer)
     {
         _buyers.Remove(buyer);
