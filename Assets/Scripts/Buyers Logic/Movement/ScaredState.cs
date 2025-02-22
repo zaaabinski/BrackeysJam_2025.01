@@ -27,6 +27,8 @@ public class ScaredState : IBuyerState
         {
             _buyer.SetState(new NormalState(_buyer));
         }
+
+        _buyer.SetLookingTrigger();
     }
 
     public void UpdateState()

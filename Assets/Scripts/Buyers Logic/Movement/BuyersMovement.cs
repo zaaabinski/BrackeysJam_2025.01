@@ -208,6 +208,11 @@ public class BuyersMovement : MonoBehaviour
          _agent.SetDestination(anomaly.transform.position);
     }
 
+    public void SetLookingTrigger()
+    {
+        anim.SetTrigger("Looking");
+    }
+
     public bool IsScared() {
         return CurrentState == BuyerStateType.Scared;
     }
