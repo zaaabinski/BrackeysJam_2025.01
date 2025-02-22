@@ -19,6 +19,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WallHiding.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/WalkingSound.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ai.navigation/Runtime/NavMeshSurface.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal/Shaders/Lit.shader" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -120,7 +121,7 @@
       <workItem from="1740221439758" duration="2015000" />
       <workItem from="1740229860136" duration="2425000" />
       <workItem from="1740243432643" duration="1279000" />
-      <workItem from="1740244775124" duration="309000" />
+      <workItem from="1740244775124" duration="5598000" />
     </task>
     <servers />
   </component>

@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         }
         _buyers.Clear();
         
-        howManyGhostToSpawn = SceneManager.GetActiveScene().buildIndex;
+        howManyGhostToSpawn = SceneManager.GetActiveScene().buildIndex-1;
         _amountOfBuyersToSpawn = 3;
 
         SpawnGhosts(howManyGhostToSpawn);
