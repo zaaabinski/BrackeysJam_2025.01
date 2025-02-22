@@ -34,17 +34,17 @@ public class PlayerController : MonoBehaviour
         
         movement = (forward * input.y + right * input.x).normalized;
         animator.SetFloat("Speed", movement.magnitude);
-        // Rotate player to face movement direction
-        if (movement.magnitude > 0.1f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
-        }
     }
 
     void FixedUpdate()
     {
         // Apply movement
         rb.linearVelocity = new Vector3(movement.x * moveSpeed, rb.linearVelocity.y, movement.z * moveSpeed);
+        // Rotate player to face movement direction
+        if (movement.magnitude > 0.1f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+        }
     }
 }
