@@ -4,46 +4,33 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [Header("Other stuff")]
-    [SerializeField] GameObject _settingsContainer;
-
-    [Header("Scene Loading")]
-    [SerializeField] private string _GameSceneName;
-    [SerializeField] private string _mainMenuSceneName;
-
     public void PlayGame(){
-        SceneManager.LoadScene(_GameSceneName);
+        SceneManager.LoadScene("Level");
     }
 
-    private void Awake()
+    public void NextLevel()
     {
-        if(SceneManager.GetActiveScene().name == _mainMenuSceneName){
-            PlayerPrefs.SetInt("howManyGhostToSpawn", 1);
-            PlayerPrefs.SetInt("amountOfBuyersToSpawn", 1);
-        }
+        SceneManager.LoadScene(sceneBuildIndex: SceneManager.GetActiveScene().buildIndex + 1);
     }
-
+    
     public void ReturnToMenu(){
-        SceneManager.LoadScene(_mainMenuSceneName);
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void RestartGameWhenOver()
     {
-        PlayerPrefs.SetInt("howManyGhostToSpawn",1);
-        PlayerPrefs.SetInt("amountOfBuyersToSpawn", 1);
-
-        SceneManager.LoadScene(_GameSceneName);
+        SceneManager.LoadScene("Level");
     }
     
     public void QuitGame(){
         Application.Quit();
     }
 
-    public void OpenSettings(){
+    /*public void OpenSettings(){
         _settingsContainer.SetActive(true);
     }
 
     public void CloseSettings(){
         _settingsContainer.SetActive(false);
-    }
+    }*/
 }
