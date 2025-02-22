@@ -5423,7 +5423,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 7643058688034238484, guid: 2b23722875c41044992456213554ce0d, type: 3}
+  m_Mesh: {fileID: -7090149136019170428, guid: b73372f6c6171cd468e09eab7a1d8427, type: 3}
 --- !u!65 &4638110395542485096
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5546,6 +5546,7 @@ GameObject:
   - component: {fileID: 1031069896511288317}
   - component: {fileID: 7761148748432579623}
   - component: {fileID: 7005284993200876245}
+  - component: {fileID: 2464575398079757593}
   m_Layer: 5
   m_Name: Info
   m_TagString: Untagged
@@ -5636,6 +5637,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2464575398079757593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555549393477889179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da43415634e8ecb4dbf61936fce93f81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &7888663379394189063
 GameObject:
   m_ObjectHideFlags: 0
