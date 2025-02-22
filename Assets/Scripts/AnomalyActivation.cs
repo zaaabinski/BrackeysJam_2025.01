@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -8,6 +9,12 @@ public class AnomalyActivation : MonoBehaviour
 {
     [SerializeField] private int chanceForSpawn=25;
     [SerializeField] private float _delayBeforeApplyingAnomaly;
+    private AnomalyScript _anomalyScript;
+
+    private void Awake()
+    {
+        _anomalyScript = GetComponentInChildren<AnomalyScript>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,11 +27,13 @@ public class AnomalyActivation : MonoBehaviour
     private IEnumerator ApplyAnomaly(GameObject ghost)
     {
         // Animation to ghost
+        if (!_anomalyScript.anomalyActive)
+        {
         ghost.GetComponentInChildren<Animator>().SetBool("Anomaly",true);
+        }
 
         // Freeze ghost
         NavMeshAgent agent = ghost.GetComponent<NavMeshAgent>();
-
         float ghostSpeed = agent.speed;
         agent.speed = 0;
 

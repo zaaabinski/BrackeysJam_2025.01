@@ -34,6 +34,7 @@ public class BuyersMovement : MonoBehaviour
     private NavMeshSurface _navmeshSurface;
     private GameObject _scaredMark;
     private Transform _visibilityStartObject;
+    public AudioSource _audioScared;
 
     [SerializeField] private GameObject _exit;
 
@@ -69,6 +70,7 @@ public class BuyersMovement : MonoBehaviour
         _exit = FindAnyObjectByType<GetAwayIdentifier>().gameObject;
         anim = GetComponentInChildren<Animator>();
         _scaredMark = transform.Find("ScaredMark").gameObject;
+        _audioScared = GetComponent<AudioSource>();
         _visibilityStartObject = transform.Find("VisibilityStartObject");
     }
 
@@ -219,6 +221,8 @@ public class BuyersMovement : MonoBehaviour
     }
 
     public void ToggleScaredMark(bool status){
+        if(status)
+            _audioScared.Play();
         _scaredMark.SetActive(status);
     }
 
