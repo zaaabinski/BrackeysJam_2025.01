@@ -46,6 +46,14 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/Game\BrackeysJam_2025.01.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\jakmi\Desktop\Game" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Unity\6000.0.31f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\jakmi\Documents\GitHub\BrackeysJam_2025.01 -debugCodeOptimization" />
@@ -108,6 +116,7 @@
       <workItem from="1740166800229" duration="2397000" />
       <workItem from="1740176571872" duration="1559000" />
       <workItem from="1740180694446" duration="825000" />
+      <workItem from="1740221439758" duration="689000" />
     </task>
     <servers />
   </component>
