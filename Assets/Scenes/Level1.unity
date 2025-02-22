@@ -3031,23 +3031,23 @@ MonoBehaviour:
   - {fileID: 1629206078}
   - {fileID: 194838214}
   - {fileID: 922057735}
-  roomTypeOne:
+  libraryTypes:
   - {fileID: 2683354441811683189, guid: ff4a7500a1afe3f428edf05851158f3e, type: 3}
   - {fileID: 6101658749346556827, guid: 59609e587a7f4b54f9b6991f92eb5b1c, type: 3}
   - {fileID: 6805117685607683473, guid: 1113e38fe50854f4fae72f99dd7ebde7, type: 3}
-  roomTypeTwo:
+  livingRoomTypes:
   - {fileID: 5987691860839723669, guid: fcb645f78707a6546b1ad30751a6ed47, type: 3}
   - {fileID: 9134326832731933588, guid: fcf55b6d12c9fad498b35df8b28713ce, type: 3}
   - {fileID: 8700953481252061433, guid: 1e16d102ad809724ab29f4d6c5dd7a78, type: 3}
-  roomTypeThree:
+  kitchenTypes:
   - {fileID: 3473557253135700295, guid: d59552733cbdc5a499c562a33b4bb276, type: 3}
   - {fileID: 8712469752888559363, guid: 4e8dba072c3b4ff45a1c784fc8174750, type: 3}
   - {fileID: 7304364192041008605, guid: ec31c249ab47e4f43acdbe293a3f02f2, type: 3}
-  roomTypeFour:
+  topBedroomTypes:
   - {fileID: 129571395394678068, guid: c74d593c3f2c46e49a422d24caee53f7, type: 3}
   - {fileID: 7017917383091516376, guid: 4d20634831af9304ebbeb0510b010b69, type: 3}
   - {fileID: 6982316437696283347, guid: 0a35b7b8775a1904fa661f577fe68226, type: 3}
-  roomTypeFive:
+  bottomBedroomTypes:
   - {fileID: 648240271969869231, guid: 8eabca9bf75dc8445a65704cd17aee54, type: 3}
   - {fileID: 9151542549285366296, guid: a1ae49d3d55e6b442b79f4e372b22a2e, type: 3}
   - {fileID: 1590403787777273056, guid: 9ed3d4fd9a05e3147b9be432a1325da7, type: 3}
