@@ -41,6 +41,7 @@ public class AnomalyScript : MonoBehaviour
     {
         _interactionReference.action.Enable();
         anomalyAnimator = gameObject.GetComponentInChildren<Animator>();
+        anomalyParticles = gameObject.GetComponentInChildren<ParticleSystem>();
         _anomalyCollider = GetComponent<Collider>(); // Get the collider reference
     }
 
@@ -78,13 +79,18 @@ public class AnomalyScript : MonoBehaviour
 
         anomalyActive = true;
         anomalyAnimator.SetBool("Start", true);
-        anomalyParticles.Play();
-
+        Invoke("StartParticles",0.5f);
         StartCoroutine(ProtectAnomaly());
-
         StartCoroutine(RefreshTrigger()); // Refresh the trigger collider
     }
 
+
+    private void StartParticles()
+    {
+        anomalyParticles.Play();
+
+    }
+    
     private IEnumerator ProtectAnomaly()
     {
         _anomalyProtected = true;
@@ -96,8 +102,8 @@ public class AnomalyScript : MonoBehaviour
     {
         isPlayerInRange = false;
         infoText.SetActive(false);
-        GameObject particles = Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
-        Destroy(particles, 1f);
+       // GameObject particles = Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
+        //Destroy(particles, 1f);
         anomalyActive = false;
         anomalyAnimator.SetBool("Start", false);
         anomalyParticles.Stop();
