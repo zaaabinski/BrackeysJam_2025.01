@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using TMPro;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -57,7 +58,13 @@ public class GameManager : MonoBehaviour
 
     #region rabbit Icons
     [SerializeField] private GameObject[] rabbitsIconList;
+    [SerializeField] private GameObject[] winIconList;
+    [SerializeField] private GameObject[] loseIconList;
     [SerializeField] private Sprite runAwayIcon;
+    [SerializeField] private Sprite didntShowUpIcon;
+    [SerializeField] private Sprite baseIcon;
+    [SerializeField] private Sprite soldIcon;
+
     #endregion
     
     private bool isGameOver = false;
@@ -121,7 +128,7 @@ public class GameManager : MonoBehaviour
         }
         _buyers.Clear();
         
-        howManyGhostToSpawn = PlayerPrefs.GetInt("howManyGhostToSpawn", 1);
+        howManyGhostToSpawn = SceneManager.GetActiveScene().buildIndex;
         _amountOfBuyersToSpawn = 3;
 
         SpawnGhosts(howManyGhostToSpawn);
@@ -138,18 +145,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void SpawnBuyers(int amount){
+    /*private void SpawnBuyers(int amount){
         for (int i = 0; i < amount; i++){
             GameObject newBuyer = Instantiate(_buyerPrefab, transform.position, Quaternion.identity);
             _buyers.Add(newBuyer);
         }
-    }
+    }*/
 
     private IEnumerator SpawnForBuyers(int amount)
     {
         for (int i = 0; i < amount; i++){
             GameObject newBuyer = Instantiate(_buyerPrefab, new Vector3(0,1,-9), Quaternion.identity);
             rabbitsIconList[i].SetActive(true);
+            Image winIconImage = winIconList[i].GetComponent<Image>();
+            winIconImage.sprite = soldIcon;
             _buyers.Add(newBuyer);
             yield return new WaitForSeconds(60f);
         }
@@ -157,13 +166,39 @@ public class GameManager : MonoBehaviour
     
     public void RemoveBuyer(GameObject buyer)
     {
-        rabbitsIconList[_buyers.Count - 1].GetComponent<Image>().sprite = runAwayIcon;
-        _buyers.Remove(buyer);
-        
-        if(_buyers.Count == 0 && !isGameOver){
+        if (_buyers.Count > 0)
+        {
+            // Always start updating from index 0 (the first buyer that escapes)
+            int index = _buyers.IndexOf(buyer);
+
+            if (index >= 0)
+            {
+                // Access the Image components directly, even if the GameObjects are inactive
+                Image rabbitIconImage = rabbitsIconList[index].GetComponent<Image>();
+                Image winIconImage = winIconList[index].GetComponent<Image>();
+                Image loseIconImage = loseIconList[index].GetComponent<Image>();
+
+                if (rabbitIconImage != null)
+                    rabbitIconImage.sprite = runAwayIcon;
+
+                if (winIconImage != null)
+                    winIconImage.sprite = runAwayIcon;
+
+                if (loseIconImage != null)
+                    loseIconImage.sprite = runAwayIcon;
+
+                // Remove the buyer from the list
+                _buyers.RemoveAt(index);
+            }
+        }
+
+        // Check if all buyers have escaped and trigger Game Over
+        if (_buyers.Count == 0 && !isGameOver)
+        {
             GameOver();
         }
     }
+
 
     private void LevelComplete()
     {
@@ -173,9 +208,9 @@ public class GameManager : MonoBehaviour
 
         winScreenPanel.SetActive(true);
 
-        if (_buyers.Count > 0) {
+        /*if (_buyers.Count > 0) {
             buyersInfoText.text =  _buyers.Count.ToString() + " stayed, there are all ghosts now...";
-        }
+        }*/
     }
 
     private void GameOver()
