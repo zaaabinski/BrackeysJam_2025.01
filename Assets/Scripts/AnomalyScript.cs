@@ -6,8 +6,10 @@ public class AnomalyScript : MonoBehaviour
 {
     #region Settings
 
-    [Header("Settings")] [SerializeField] private InputActionReference _interactionReference;
+    [Header("Settings")] 
+    [SerializeField] private InputActionReference _interactionReference;
     [SerializeField] private float _anomalyProtectionTime;
+    [SerializeField] private float _delayBeforeDeactivate = 0.5f;
 
     #endregion
 
@@ -25,6 +27,7 @@ public class AnomalyScript : MonoBehaviour
 
     private bool isPlayerInRange = false;
     private AudioSource fireSound;
+    private bool _canDeactivate = true;
 
     #endregion
 
@@ -52,10 +55,19 @@ public class AnomalyScript : MonoBehaviour
     {
         bool keyPressed = _interactionReference.action.ReadValue<float>() == 1;
 
-        if (keyPressed && isPlayerInRange && anomalyActive)
+        if (keyPressed && isPlayerInRange && anomalyActive && _canDeactivate)
         {
             StopAnomaly();
         }
+    }
+
+    private IEnumerator CanDeactivateCooldown()
+    {
+        _canDeactivate = false;
+
+        yield return new WaitForSeconds(_delayBeforeDeactivate);
+
+        _canDeactivate = true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,9 +94,12 @@ public class AnomalyScript : MonoBehaviour
 
         anomalyActive = true;
         anomalyAnimator.SetBool("Start", true);
+
         Invoke("StartParticles", 0.5f);
+
         StartCoroutine(ProtectAnomaly());
         StartCoroutine(RefreshTrigger()); // Refresh the trigger collider
+        StartCoroutine(CanDeactivateCooldown());
     }
 
 
