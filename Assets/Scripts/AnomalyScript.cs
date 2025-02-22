@@ -6,18 +6,16 @@ public class AnomalyScript : MonoBehaviour
 {
     #region Settings
 
-    [Header("Settings")]
-
-    [SerializeField] private InputActionReference _interactionReference;
+    [Header("Settings")] [SerializeField] private InputActionReference _interactionReference;
     [SerializeField] private float _anomalyProtectionTime;
 
     #endregion
 
     #region Instances / Components
 
-    [Header("Instances / Components")]
+    [Header("Instances / Components")] [SerializeField]
+    private GameObject infoText;
 
-    [SerializeField] private GameObject infoText;
     [SerializeField] private GameObject anomalyGoneParticles;
     private Collider _anomalyCollider; // Added reference to the collider
 
@@ -26,15 +24,19 @@ public class AnomalyScript : MonoBehaviour
     #region Private Variables
 
     private bool isPlayerInRange = false;
+    private AudioSource fireSound;
 
     #endregion
 
     public bool anomalyActive = true;
     public bool _anomalyProtected = false;
 
+
     #region Animation
+
     [SerializeField] private Animator anomalyAnimator;
     [SerializeField] private ParticleSystem anomalyParticles;
+
     #endregion
 
     private void Awake()
@@ -43,6 +45,7 @@ public class AnomalyScript : MonoBehaviour
         anomalyAnimator = gameObject.GetComponentInChildren<Animator>();
         anomalyParticles = gameObject.GetComponentInChildren<ParticleSystem>();
         _anomalyCollider = GetComponent<Collider>(); // Get the collider reference
+        fireSound = GetComponentInChildren<AudioSource>();
     }
 
     private void Update()
@@ -79,7 +82,7 @@ public class AnomalyScript : MonoBehaviour
 
         anomalyActive = true;
         anomalyAnimator.SetBool("Start", true);
-        Invoke("StartParticles",0.5f);
+        Invoke("StartParticles", 0.5f);
         StartCoroutine(ProtectAnomaly());
         StartCoroutine(RefreshTrigger()); // Refresh the trigger collider
     }
@@ -88,9 +91,9 @@ public class AnomalyScript : MonoBehaviour
     private void StartParticles()
     {
         anomalyParticles.Play();
-
+        fireSound.Play();
     }
-    
+
     private IEnumerator ProtectAnomaly()
     {
         _anomalyProtected = true;
@@ -102,11 +105,10 @@ public class AnomalyScript : MonoBehaviour
     {
         isPlayerInRange = false;
         infoText.SetActive(false);
-       // GameObject particles = Instantiate(anomalyGoneParticles, transform.position, Quaternion.identity);
-        //Destroy(particles, 1f);
-        anomalyActive = false;
-        anomalyAnimator.SetBool("Start", false);
+        fireSound.Stop();
         anomalyParticles.Stop();
+        anomalyAnimator.SetBool("Start", false);
+        anomalyActive = false;
     }
 
     private IEnumerator RefreshTrigger()
