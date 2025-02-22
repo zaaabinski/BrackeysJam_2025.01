@@ -646,7 +646,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &348504889
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1012,9 +1012,9 @@ RectTransform:
   - {fileID: 2007199516}
   m_Father: {fileID: 429955532}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 370.2, y: 261.7}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -269.8, y: -98.29999}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &486421457
@@ -2190,7 +2190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1519744553
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2813,7 +2813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2007199516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3109,6 +3109,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelEndWin
       objectReference: {fileID: 0}
+    - target: {fileID: 5747337380896668141, guid: 82a7cf287b175e94a9abf6af2ae64768, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6129301520456561401, guid: 82a7cf287b175e94a9abf6af2ae64768, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3238,6 +3242,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelEndLose
       objectReference: {fileID: 0}
+    - target: {fileID: 3385693136984590029, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2139952185}
+    - target: {fileID: 3385693136984590029, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RestartGameWhenOver
+      objectReference: {fileID: 0}
     - target: {fileID: 3879095043135141326, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3317,6 +3329,14 @@ PrefabInstance:
     - target: {fileID: 3879095043135141326, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7670612233292963633, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2139952185}
+    - target: {fileID: 7670612233292963633, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
