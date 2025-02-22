@@ -18,6 +18,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WallHiding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/WalkingSound.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal/Shaders/Lit.shader" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -117,6 +118,7 @@
       <workItem from="1740176571872" duration="1559000" />
       <workItem from="1740180694446" duration="825000" />
       <workItem from="1740221439758" duration="2015000" />
+      <workItem from="1740229860136" duration="2425000" />
     </task>
     <servers />
   </component>
