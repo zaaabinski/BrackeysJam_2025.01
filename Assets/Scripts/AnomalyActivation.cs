@@ -20,7 +20,7 @@ public class AnomalyActivation : MonoBehaviour
     private IEnumerator ApplyAnomaly(GameObject ghost)
     {
         // Animation to ghost
-        ghost.GetComponent<Animator>().SetTrigger("Anomaly");
+        ghost.GetComponentInChildren<Animator>().SetBool("Anomaly",true);
 
         // Freeze ghost
         NavMeshAgent agent = ghost.GetComponent<NavMeshAgent>();
@@ -31,6 +31,8 @@ public class AnomalyActivation : MonoBehaviour
         yield return new WaitForSeconds(_delayBeforeApplyingAnomaly);
 
         agent.speed = ghostSpeed;
+        ghost.GetComponentInChildren<Animator>().SetBool("Anomaly",false);
+
 
         // Apply anomaly
         Random random = new Random();
