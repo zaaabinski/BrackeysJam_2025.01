@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private int howManyGhostToSpawn = 1;
     [SerializeField] private GameObject ghostPrefab;
+    [SerializeField] private Transform getAwayPoint;
 
     private int _amountOfBuyersToSpawn = 3;
 
@@ -157,7 +158,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator SpawnForBuyers(int amount)
     {
         for (int i = 0; i < amount; i++){
-            GameObject newBuyer = Instantiate(_buyerPrefab, new Vector3(0,1,-9), Quaternion.identity);
+            GameObject newBuyer = Instantiate(_buyerPrefab, getAwayPoint.transform.position + new Vector3(0,0,2), Quaternion.identity);
             rabbitsIconList[i].SetActive(true);
             knockAudioSource.Play();
             Image winIconImage = winIconList[i].GetComponent<Image>();
