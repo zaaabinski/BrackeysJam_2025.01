@@ -6,6 +6,7 @@ using Unity.AI.Navigation;
 using System.Linq;
 using Random = UnityEngine.Random;
 using Unity.Collections;
+using TMPro;
 
 public enum BuyerStateType
 {
@@ -211,6 +212,11 @@ public class BuyersMovement : MonoBehaviour
     public void SetLookingTrigger()
     {
         anim.SetTrigger("Looking");
+    }
+
+    public void SetWalkingTrigger()
+    {
+        anim.SetTrigger("Walking");
     }
 
     public bool IsScared() {
