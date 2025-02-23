@@ -2199,6 +2199,8 @@ MonoBehaviour:
   - {fileID: 648240271969869231, guid: 8eabca9bf75dc8445a65704cd17aee54, type: 3}
   - {fileID: 9151542549285366296, guid: a1ae49d3d55e6b442b79f4e372b22a2e, type: 3}
   - {fileID: 1590403787777273056, guid: 9ed3d4fd9a05e3147b9be432a1325da7, type: 3}
+  beedroomThreeWalls: []
+  livingRoomThreeWalls: []
 --- !u!1 &1014437215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3189,7 +3191,7 @@ Transform:
   m_GameObject: {fileID: 2006010543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -11.32}
+  m_LocalPosition: {x: 0.58, y: 0, z: -11.442}
   m_LocalScale: {x: 3.65, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3388,6 +3390,7 @@ MonoBehaviour:
   _buyerPrefab: {fileID: 2354161386839153891, guid: 721254d7d3c7f1f41bc61eab74924136, type: 3}
   howManyGhostToSpawn: 1
   ghostPrefab: {fileID: 6441617696671549818, guid: 27d0cfd7c4bf55d44802cf7b9651211d, type: 3}
+  getAwayPoint: {fileID: 2006010544}
   _buyers: []
   knockAudioSource: {fileID: 2040588306}
   slamAudioSource: {fileID: 2040588305}

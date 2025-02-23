@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,8 @@ public class SpawnLayouts : MonoBehaviour
     [SerializeField] private GameObject[] kitchenTypes;
     [SerializeField] private GameObject[] topBedroomTypes;
     [SerializeField] private GameObject[] bottomBedroomTypes;
+    [SerializeField] private GameObject[] beedroomThreeWalls;
+    [SerializeField] private GameObject[] livingRoomThreeWalls;
 
     private void Start()
     {
@@ -96,6 +99,83 @@ public class SpawnLayouts : MonoBehaviour
                 if (selectedRoomType.Length > 0)
                 {
                     Instantiate(selectedRoomType[Random.Range(0, selectedRoomType.Length)], layouts[i].transform.position,rotation);
+                }
+
+                navSurfaceBuyer.BuildNavMesh();
+                navSurfaceGhost.BuildNavMesh();
+            }
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            Quaternion rotation = Quaternion.Euler(0, 0, 0);
+            for (int i = 0; i < layouts.Count; i++)
+            {
+                GameObject[] selectedRoomType;
+
+                if (i == 0)
+                {
+                    selectedRoomType = libraryTypes;
+                    rotation = Quaternion.Euler(0, 270, 0);
+                }
+                else if (i == 1)
+                {
+                    selectedRoomType = libraryTypes;
+                    rotation = Quaternion.Euler(0, 90, 0);
+                }
+                else if (i == 2)
+                {
+                    selectedRoomType = bottomBedroomTypes;
+                    rotation = Quaternion.Euler(0, 270, 0);
+                }
+                else if (i == 3)
+                {
+                    selectedRoomType = bottomBedroomTypes;
+                    rotation = Quaternion.Euler(0, 270, 0);
+                }
+                else if (i == 4)
+                {
+                    selectedRoomType = bottomBedroomTypes;
+                    rotation = Quaternion.Euler(0, 270, 0);
+
+                }
+                else if (i == 5)
+                {
+                    selectedRoomType = livingRoomTypes;
+                    rotation = Quaternion.Euler(0, 90, 0);
+                }
+                else if (i == 6)
+                {
+                    selectedRoomType = kitchenTypes;
+                    rotation = Quaternion.Euler(0, 90, 0);
+
+                }
+                else if (i == 7)
+                {
+                    selectedRoomType = kitchenTypes;
+                    rotation = Quaternion.Euler(0, 270, 0);
+                }
+    
+                else if (i == 8)
+                {
+                    selectedRoomType = livingRoomThreeWalls;
+                    rotation = Quaternion.Euler(0, 180, 0);
+                }
+                else if (i == 9)
+                {
+                    selectedRoomType = livingRoomThreeWalls;
+                    rotation = Quaternion.Euler(0, 270, 0);
+                }
+                else if (i == 10)
+                {
+                    selectedRoomType = beedroomThreeWalls;
+                    rotation = Quaternion.Euler(0, 180, 0);
+                }
+                else selectedRoomType = livingRoomTypes;
+
+                if (selectedRoomType.Length > 0)
+                {
+                    Instantiate(selectedRoomType[Random.Range(0, selectedRoomType.Length)],
+                        layouts[i].transform.position, rotation);
                 }
 
                 navSurfaceBuyer.BuildNavMesh();
