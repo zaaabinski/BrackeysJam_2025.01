@@ -629,6 +629,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &330845012 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8717617119639638312, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
+  m_PrefabInstance: {fileID: 1144810377744429048}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &348504888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3046,7 +3057,7 @@ MonoBehaviour:
   knockAudioSource: {fileID: 2040588305}
   slamAudioSource: {fileID: 2040588306}
   finalPointsWin: {fileID: 716199412}
-  finalPointsLose: {fileID: 0}
+  finalPointsLose: {fileID: 330845012}
   rabbitsIconList:
   - {fileID: 1519744552}
   - {fileID: 348504888}
