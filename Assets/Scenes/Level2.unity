@@ -2369,63 +2369,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 971451393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1272793845
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.19
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
-      propertyPath: m_Name
-      value: DemonicCircle (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e, type: 3}
 --- !u!1001 &1334047084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2603,6 +2546,17 @@ Transform:
   - {fileID: 1984254140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1500849566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8717617119639638312, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
+  m_PrefabInstance: {fileID: 1334047084}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1519744552
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,6 +2768,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521417414}
   m_CullTransparentMesh: 1
+--- !u!114 &1532313540 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 987876960727739143, guid: 82a7cf287b175e94a9abf6af2ae64768, type: 3}
+  m_PrefabInstance: {fileID: 140572858}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1629206078
 GameObject:
   m_ObjectHideFlags: 0
@@ -3378,7 +3343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512eb1da88dace446b020d7e37bb166d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startTime: 180
+  points: 0
+  _startTime: 90
   _timer: 0
   timerText: {fileID: 1521417416}
   fearGap: 50
@@ -3394,6 +3360,8 @@ MonoBehaviour:
   _buyers: []
   knockAudioSource: {fileID: 2040588306}
   slamAudioSource: {fileID: 2040588305}
+  finalPointsWin: {fileID: 1532313540}
+  finalPointsLose: {fileID: 1500849566}
   rabbitsIconList:
   - {fileID: 1519744552}
   - {fileID: 348504888}
@@ -4007,4 +3975,3 @@ SceneRoots:
   - {fileID: 971451393}
   - {fileID: 1751707545}
   - {fileID: 550845824}
-  - {fileID: 1272793845}
