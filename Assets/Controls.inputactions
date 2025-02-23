@@ -9,7 +9,7 @@
                     "name": "Movement",
                     "type": "Value",
                     "id": "1ed02bcf-5f07-450f-8b25-8ef8895de856",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -82,11 +82,33 @@
                 },
                 {
                     "name": "",
+                    "id": "c0e5a07e-e798-48a8-8c41-1348dba4dec1",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard;Mobile",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a80446e0-7af1-4f08-9463-465c741bc236",
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "286d29e4-1425-47f8-b81e-6c41732c3545",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mobile",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -101,6 +123,17 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Mobile",
+            "bindingGroup": "Mobile",
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
                     "isOptional": false,
                     "isOR": false
                 }
