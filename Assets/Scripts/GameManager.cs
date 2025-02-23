@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     [Header("Buyer and ghost spawning settings")]
 
     //[SerializeField] private int _buyersIncrementPerLevel;
+    
     [SerializeField] private GameObject _buyerPrefab;
     
     [SerializeField] private int howManyGhostToSpawn = 1;
@@ -53,7 +54,8 @@ public class GameManager : MonoBehaviour
 
     private List<GameObject> _ghosts = new();
     public List<GameObject> _buyers = new();
-
+    [SerializeField] private AudioSource knockAudioSource;
+    [SerializeField] private AudioSource slamAudioSource;
     #endregion
 
     #region rabbit Icons
@@ -157,6 +159,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < amount; i++){
             GameObject newBuyer = Instantiate(_buyerPrefab, new Vector3(0,1,-9), Quaternion.identity);
             rabbitsIconList[i].SetActive(true);
+            knockAudioSource.Play();
             Image winIconImage = winIconList[i].GetComponent<Image>();
             winIconImage.sprite = soldIcon;
             _buyers.Add(newBuyer);
@@ -188,6 +191,7 @@ public class GameManager : MonoBehaviour
                     loseIconImage.sprite = runAwayIcon;
 
                 // Remove the buyer from the list
+                slamAudioSource.Play();
                 _buyers.RemoveAt(index);
             }
         }
