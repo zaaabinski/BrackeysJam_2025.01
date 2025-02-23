@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 44ce016a2bcb815498084dba3874ca03
+guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Atlas
+    second: {fileID: 2100000, guid: aa614b5ac0fc236409bdc05334a12644, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bright
+    second: {fileID: 2100000, guid: 0a77616a6bfd4f745856e9a9c0e7c903, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -30,7 +40,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

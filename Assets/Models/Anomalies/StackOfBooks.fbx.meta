@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 85dcc7bf6b28b3847ab34dcc75cc8d8e
+guid: 72f62deb0cf7cf046b05a2c3e1dda111
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Atlas.001
+    second: {fileID: 2100000, guid: aa614b5ac0fc236409bdc05334a12644, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -30,7 +35,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1

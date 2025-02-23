@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 72f62deb0cf7cf046b05a2c3e1dda111
+guid: 7360637b71754364c905fac0750a9d6c
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bright
+    second: {fileID: 2100000, guid: 0a77616a6bfd4f745856e9a9c0e7c903, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_Corpse
+    second: {fileID: 2100000, guid: 8a1e1c8613d7f9f499541bbf70276bef, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
