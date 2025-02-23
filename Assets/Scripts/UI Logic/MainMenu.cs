@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private GameObject creditsPanel;
 
     public void ShowControlsPanel()
     {
         controlsPanel.SetActive(true);
     }
     
-    public void PlayGame(){
+    /*public void PlayGame(){
         SceneManager.LoadScene("Level");
-    }
+    }*/
 
     public void NextLevel()
     {
@@ -33,12 +34,12 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    /*public void OpenSettings(){
-        _settingsContainer.SetActive(true);
+    public void OpenCredits(){
+        creditsPanel.SetActive(true);
     }
 
-    public void CloseSettings(){
-        _settingsContainer.SetActive(false);
-    }*/
+    public void CloseCredits(){
+        creditsPanel.SetActive(false);
+    }
     
 }
