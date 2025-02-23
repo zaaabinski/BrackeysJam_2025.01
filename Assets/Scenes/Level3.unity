@@ -1060,6 +1060,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8057f72db6ce12a4b81456eccf2ab7e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &629307850 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8717617119639638312, guid: 70478c5ba248b7b47a12fcc2155589ed, type: 3}
+  m_PrefabInstance: {fileID: 956445536}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &712419970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,6 +2955,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 971451393}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1975228182 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 987876960727739143, guid: 82a7cf287b175e94a9abf6af2ae64768, type: 3}
+  m_PrefabInstance: {fileID: 1652922740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1984254136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3328,7 +3350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 512eb1da88dace446b020d7e37bb166d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startTime: 180
+  points: 0
+  _startTime: 90
   _timer: 0
   timerText: {fileID: 1521417416}
   fearGap: 50
@@ -3344,6 +3367,8 @@ MonoBehaviour:
   _buyers: []
   knockAudioSource: {fileID: 2040588305}
   slamAudioSource: {fileID: 2040588306}
+  finalPointsWin: {fileID: 1975228182}
+  finalPointsLose: {fileID: 629307850}
   rabbitsIconList:
   - {fileID: 1519744552}
   - {fileID: 348504888}

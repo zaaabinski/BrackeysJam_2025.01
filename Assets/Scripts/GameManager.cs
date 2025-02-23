@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
+    [SerializeField] private int points;
     #region timer
 
     [Header("Timer Logic")]
@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region rabbit Icons
+
+    [SerializeField] private TextMeshProUGUI finalPointsWin;
+    [SerializeField] private TextMeshProUGUI finalPointsLose;
     [SerializeField] private GameObject[] rabbitsIconList;
     [SerializeField] private GameObject[] winIconList;
     [SerializeField] private GameObject[] loseIconList;
@@ -114,7 +117,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         generalFear = 0;
         _timer = _startTime;
-
+        points = 0;
         // Destroy deactivated ghosts from last time
         foreach (GameObject ghost in _ghosts){
             if (ghost == null) continue;
@@ -162,9 +165,10 @@ public class GameManager : MonoBehaviour
             rabbitsIconList[i].SetActive(true);
             knockAudioSource.Play();
             Image winIconImage = winIconList[i].GetComponent<Image>();
+            points += 1000;
             winIconImage.sprite = soldIcon;
             _buyers.Add(newBuyer);
-            yield return new WaitForSeconds(60f);
+            yield return new WaitForSeconds(30f);
         }
     }
     
@@ -174,7 +178,7 @@ public class GameManager : MonoBehaviour
         {
             // Always start updating from index 0 (the first buyer that escapes)
             int index = _buyers.IndexOf(buyer);
-
+            points -= 500;
             if (index >= 0)
             {
                 // Access the Image components directly, even if the GameObjects are inactive
@@ -210,8 +214,8 @@ public class GameManager : MonoBehaviour
         howManyGhostToSpawn += _buyers.Count;
 
         PlayerPrefs.SetInt("howManyGhostToSpawn", howManyGhostToSpawn);
-
         winScreenPanel.SetActive(true);
+        finalPointsWin.text = $"{points} points";
 
         /*if (_buyers.Count > 0) {
             buyersInfoText.text =  _buyers.Count.ToString() + " stayed, there are all ghosts now...";
@@ -224,6 +228,7 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         Time.timeScale = 0;
         loseScreenPanel.SetActive(true);
+        finalPointsLose.text = $"{points} points";
         Debug.Log("Game over");
     }
     
