@@ -6,6 +6,7 @@ using Unity.AI.Navigation;
 using System.Linq;
 using Random = UnityEngine.Random;
 using Unity.Collections;
+using TMPro;
 
 public enum BuyerStateType
 {
@@ -187,13 +188,13 @@ public class BuyersMovement : MonoBehaviour
     {
         Vector3 direction = anomalyCollider.transform.position - _visibilityStartObject.position;
         AnomalyScript anomalyScript = anomalyCollider.gameObject.GetComponent<AnomalyScript>();
+
         if (anomalyCollider.bounds.Contains(_visibilityStartObject.position))
         {
-            return true; // If starting point is inside the anomaly, it's considered visible
-            // THIS FIXED THE PROBLEM LETS FUCKIGN GO!!!!
+            return true;
         }
 
-        if (Physics.SphereCast(_visibilityStartObject.position, 0.1f, direction, out RaycastHit hit, _anomalyDetectionRadus, _visibilityCheckMask))
+        if (Physics.Raycast(_visibilityStartObject.position, direction, out RaycastHit hit, _anomalyDetectionRadus, _visibilityCheckMask))
         {
             return hit.collider == anomalyCollider && anomalyScript.anomalyActive;
         }
@@ -211,6 +212,11 @@ public class BuyersMovement : MonoBehaviour
     public void SetLookingTrigger()
     {
         anim.SetTrigger("Looking");
+    }
+
+    public void SetWalkingTrigger()
+    {
+        anim.SetTrigger("Walking");
     }
 
     public bool IsScared() {

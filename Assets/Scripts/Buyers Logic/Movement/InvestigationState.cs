@@ -15,6 +15,7 @@ public class InvestigationState : IBuyerState
 
         _buyer.MoveToAnomaly();
         _buyer.ToggleScaredMark(true);
+        _buyer.SetWalkingTrigger();
      }
 
     public void UpdateState()
