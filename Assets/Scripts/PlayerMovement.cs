@@ -11,6 +11,22 @@ public class PlayerController : MonoBehaviour
     private Vector3 movement;
     private Rigidbody rb;
 
+    private Vector2 _input;
+
+    private void OnEnable()
+    {
+        // Subscribe to both the performed and canceled events
+        _moveReference.action.performed += UpdateInput;
+        _moveReference.action.canceled += UpdateInput;
+    }
+
+    private void OnDisable()
+    {
+        // Unsubscribe from both events when the object is disabled
+        _moveReference.action.performed -= UpdateInput;
+        _moveReference.action.canceled -= UpdateInput;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -18,11 +34,18 @@ public class PlayerController : MonoBehaviour
         _moveReference.action.Enable();
     }
 
-    void Update()
+    public void UpdateInput(InputAction.CallbackContext context)
     {
-        // Get input
-        Vector2 input = _moveReference.action.ReadValue<Vector2>();
+        _input = context.ReadValue<Vector2>();
+    }
 
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
         // Convert movement to be relative to camera rotation
         Vector3 forward = cameraTransform.forward;
         Vector3 right = cameraTransform.right;
@@ -31,15 +54,13 @@ public class PlayerController : MonoBehaviour
         right.y = 0;
         forward.Normalize();
         right.Normalize();
-        
-        movement = (forward * input.y + right * input.x).normalized;
-        animator.SetFloat("Speed", movement.magnitude);
-    }
 
-    void FixedUpdate()
-    {
+        movement = (forward * _input.y + right * _input.x).normalized;
+        animator.SetFloat("Speed", movement.magnitude);
+
         // Apply movement
         rb.linearVelocity = new Vector3(movement.x * moveSpeed, rb.linearVelocity.y, movement.z * moveSpeed);
+
         // Rotate player to face movement direction
         if (movement.magnitude > 0.1f)
         {
