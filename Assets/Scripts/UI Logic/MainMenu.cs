@@ -4,6 +4,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private GameObject controlsPanel;
+
+    public void ShowControlsPanel()
+    {
+        controlsPanel.SetActive(true);
+    }
+    
     public void PlayGame(){
         SceneManager.LoadScene("Level");
     }
