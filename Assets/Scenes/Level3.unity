@@ -3869,18 +3869,13 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007199515}
   m_CullTransparentMesh: 1
---- !u!1 &2025556787 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 71e69f9e258c76249b14ee7d0847469b, type: 3}
-  m_PrefabInstance: {fileID: 770663169}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &2025556788
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2025556787}
+  m_GameObject: {fileID: 919132148716428880}
   m_Material: {fileID: 13400000, guid: 77bfd7754a8b2964dbf0847fa1e3fa42, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -4454,6 +4449,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &919132148716428880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 71e69f9e258c76249b14ee7d0847469b, type: 3}
+  m_PrefabInstance: {fileID: 770663169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1659827374886417685
 MonoBehaviour:
   m_ObjectHideFlags: 0
