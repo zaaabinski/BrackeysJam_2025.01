@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dca44ad483629474ab6a03eb8bde0b30
+guid: af73d07191a718e438730a3d12526763
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: thumbnail_Flame_0
+      name: thumbnail_Flame base_0
       rect:
         serializedVersion: 2
-        x: 50
-        y: 87
-        width: 898
-        height: 882
+        x: 233
+        y: 179
+        width: 535
+        height: 717
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,8 +151,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7824bf65a94589c4fbf07b9bd60014ad
-      internalID: 1702614055
+      spriteID: 006a6c2f07ada514697cb50f1c3c2419
+      internalID: 570137391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Flame base_1
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 320
+        width: 44
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b8265b01d259634984cc9a0624c845e
+      internalID: 875344115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Flame base_2
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 121
+        width: 29
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f70dcae0e291f246b0a09cf9e45e1aa
+      internalID: 477236487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Flame base_3
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 139
+        width: 44
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d24552e6af8cc6249bd699eaff892e8a
+      internalID: 13619753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Flame base_4
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 123
+        width: 64
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6ad3358c6227c149aeac59f59b5dabc
+      internalID: 1361182538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: thumbnail_Flame base_5
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 128
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 775fc9a755f789f4486303f964f0ae1a
+      internalID: -1098898532
       vertices: []
       indices: 
       edges: []
@@ -161,7 +271,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d7f67f43b40a4a741947977db2f42002
+    spriteID: 948f2882ada9c804cbe64e98e86f161f
     internalID: 0
     vertices: []
     indices: 
@@ -171,7 +281,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      thumbnail_Flame_0: 1702614055
+      thumbnail_Flame base_0: 570137391
+      thumbnail_Flame base_1: 875344115
+      thumbnail_Flame base_2: 477236487
+      thumbnail_Flame base_3: 13619753
+      thumbnail_Flame base_4: 1361182538
+      thumbnail_Flame base_5: -1098898532
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
