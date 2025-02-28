@@ -1,12 +1,10 @@
 using System;
-using UnityEngine;
-using System.Collections;
-using UnityEngine.AI;
-using Unity.AI.Navigation;
+using System.Diagnostics;
 using System.Linq;
-using Random = UnityEngine.Random;
-using Unity.Collections;
-using TMPro;
+using System.Reflection;
+using Unity.AI.Navigation;
+using UnityEngine;
+using UnityEngine.AI;
 
 public enum BuyerStateType
 {
@@ -14,7 +12,8 @@ public enum BuyerStateType
     Investigating,
     Scared,
     Escaping,
-    HasEscaped
+    HasEscaped,
+    Looking
 }
 
 public interface IBuyerState
@@ -45,18 +44,11 @@ public class BuyersMovement : MonoBehaviour
 
     [Header("Settings")]
     
-    [SerializeField] private float _scareTimeBeforeRunning;
+    public float _scareTimeBeforeRunning;
     [SerializeField] private float _anomalyDetectionRadus;
     [SerializeField] private BuyersSettings _buyerSettings;
-    [SerializeField] private float _resumeMovingDelay;
+    public float _resumeMovingDelay;
     [SerializeField] private float _speed = 3.5f;
-
-    #endregion
-
-    #region state tracking variables
-
-    private float _scaredTimer;
-    private bool _isPickingDestination;
 
     #endregion
 
@@ -84,11 +76,7 @@ public class BuyersMovement : MonoBehaviour
         _currentState?.UpdateState();
 
         if (IsScared()){
-            _scaredTimer += Time.deltaTime;
             GameManager.instance.AddFear(Time.deltaTime);
-        }
-        else{
-            _scaredTimer = 0;
         }
     }
 
@@ -106,40 +94,13 @@ public class BuyersMovement : MonoBehaviour
 
     public void PickRandomDestination()
     {
-        StartCoroutine(DelayBeforePickingRandomDestination());
-    }
-
-    private IEnumerator DelayBeforePickingRandomDestination() {
-        if (_isPickingDestination)
-        {
-            yield break;
-        }
-        
-        anim.SetTrigger("Looking");
-        _agent.speed = 0;
-
-        _isPickingDestination = true;
-        yield return new WaitForSeconds(_resumeMovingDelay);
-
-        if (CurrentState != BuyerStateType.Normal)
-        {
-            CloseCoroutine();
-            yield break;
-        }
-
-        _agent.speed = _speed;
-
         Vector3 randomDestination = _navmeshUtilities.GetRandomPointOnNavmesh(_navmeshSurface);
-        anim.SetTrigger("Walking");
         _agent.SetDestination(randomDestination);
-
-        _isPickingDestination = false;
     }
 
     private void CloseCoroutine()
     {
         StopAllCoroutines();
-        _isPickingDestination = false;
         _agent.speed = _speed;
     }
 
@@ -223,10 +184,6 @@ public class BuyersMovement : MonoBehaviour
         return CurrentState == BuyerStateType.Scared;
     }
 
-    public bool ShouldEscape() { 
-        return _scaredTimer > _scareTimeBeforeRunning;
-    }
-
     public void RetargetToExit(){
         _agent.SetDestination(_exit.transform.position);
     }
@@ -237,7 +194,7 @@ public class BuyersMovement : MonoBehaviour
         _scaredMark.SetActive(status);
     }
 
-    public void LerpScaredMarkColor(){
+    public void LerpScaredMarkColor(float _scaredTimer){
         float normalizedScaredTimer = _scaredTimer / _scareTimeBeforeRunning;
         _scaredMark.GetComponent<Renderer>().material.color = _buyerSettings.ScaredMarkGradient.Evaluate(normalizedScaredTimer);
 

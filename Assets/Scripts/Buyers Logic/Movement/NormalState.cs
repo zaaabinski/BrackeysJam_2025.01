@@ -12,6 +12,8 @@ public class NormalState : IBuyerState
 
     public void EnterState() { 
         _buyer.ToggleScaredMark(false);
+        _buyer.SetWalkingTrigger();
+        _buyer.PickRandomDestination();
     }
 
     public void UpdateState()
@@ -19,7 +21,7 @@ public class NormalState : IBuyerState
         if (_buyer.CheckForAnomalies()) {
             _buyer.SetState(new InvestigationState(_buyer));
         } else if (_buyer.HasReachedDestination()) {
-            _buyer.PickRandomDestination();
+            _buyer.SetState(new LookingState(_buyer));
         }
     }
 
