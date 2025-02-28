@@ -8,6 +8,8 @@ public class ScaredState : IBuyerState
     private GameObject _anomalyFollowing;
     private AnomalyScript _anomalyScript;
 
+    private float _scaredTimer = 0f;
+
     public ScaredState(BuyersMovement buyer)
     {
         _buyer = buyer;
@@ -33,20 +35,24 @@ public class ScaredState : IBuyerState
 
     public void UpdateState()
     {
+        _scaredTimer += Time.deltaTime;
+
         if (_anomalyScript.anomalyActive == false)
         {
             _buyer.SetState(new NormalState(_buyer));
         }
 
-        if ((_buyer.FindClosestAnomaly() != _anomalyFollowing)){
+        GameObject closestAnomaly = _buyer.FindClosestAnomaly();
+
+        if ((closestAnomaly != _anomalyFollowing)){
             _buyer.SetState(new NormalState(_buyer));
         }
 
-        if (_buyer.ShouldEscape()){
+        if (_scaredTimer > _buyer._scareTimeBeforeRunning){
             _buyer.SetState(new EscapingState(_buyer));
         }
 
-        _buyer.LerpScaredMarkColor();
+        _buyer.LerpScaredMarkColor(_scaredTimer);
     }
 
     public void ExitState() { }

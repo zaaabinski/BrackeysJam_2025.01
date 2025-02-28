@@ -11,10 +11,11 @@ public class InvestigationState : IBuyerState
     }
 
     public void EnterState() {
-        _buyer.LerpScaredMarkColor();
+        _buyer.LerpScaredMarkColor(0); // completely white mark
 
         _buyer.MoveToAnomaly();
         _buyer.ToggleScaredMark(true);
+        _buyer.SetWalkingTrigger();
      }
 
     public void UpdateState()
